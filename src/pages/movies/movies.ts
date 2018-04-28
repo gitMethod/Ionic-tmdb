@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {IonicPage} from 'ionic-angular';
-import {MoviesProvider} from '../../providers/api-tmdb/movies';
-import {PopCtrlProvider} from '../../providers/shared-data/pop-ctrl';
+import {MoviesProvider} from '../../providers/rest-tmdb/movies.provider';
+import {PopCtrlProvider} from '../../providers/shared-data/pop-ctrl.provider';
 @IonicPage()
 @Component({
   selector: 'page-movies',

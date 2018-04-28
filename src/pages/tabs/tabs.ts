@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams, Tab, Tabs} from 'ionic-angular';
 import {MoviesPage} from '../movies/movies';
 import {PeoplePage} from '../people/people';
 import {TvShowsPage} from '../tv-shows/tv-shows';
-import {PopCtrlProvider} from '../../providers/shared-data/pop-ctrl';
+import {PopCtrlProvider} from '../../providers/shared-data/pop-ctrl.provider';
 
 
 @IonicPage()

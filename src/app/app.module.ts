@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -10,9 +10,12 @@ import {TvShowsPage} from '../pages/tv-shows/tv-shows';
 import {PeoplePage} from '../pages/people/people';
 import {TabsPage} from '../pages/tabs/tabs';
 import {HttpClientModule} from '@angular/common/http';
-import { MoviesProvider } from '../providers/api-tmdb/movies';
+import { MoviesProvider } from '../providers/rest-tmdb/movies.provider';
 import {MoviesPopCtrlPage} from '../pages/pop-menu/pop-menu';
-import { PopCtrlProvider } from '../providers/shared-data/pop-ctrl';
+import { PopCtrlProvider } from '../providers/shared-data/pop-ctrl.provider';
+import {SearchPage} from '../pages/search/search';
+import { SearchBarProvider } from '../providers/shared-data/search-bar.provider';
+import { MultiSearchProvider } from '../providers/rest-tmdb/multi-search';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import { PopCtrlProvider } from '../providers/shared-data/pop-ctrl';
     TvShowsPage,
     PeoplePage,
     TabsPage,
-    MoviesPopCtrlPage
+    MoviesPopCtrlPage,
+    SearchPage
   ],
   imports: [
     BrowserModule,
@@ -35,14 +39,17 @@ import { PopCtrlProvider } from '../providers/shared-data/pop-ctrl';
     TvShowsPage,
     PeoplePage,
     TabsPage,
-    MoviesPopCtrlPage
+    MoviesPopCtrlPage,
+    SearchPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MoviesProvider,
-    PopCtrlProvider
+    PopCtrlProvider,
+    SearchBarProvider,
+    MultiSearchProvider
   ]
 })
 export class AppModule {}

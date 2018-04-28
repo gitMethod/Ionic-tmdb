@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, ViewController} from 'ionic-angular';
-import {PopCtrlProvider} from '../../providers/shared-data/pop-ctrl';
+import {PopCtrlProvider} from '../../providers/shared-data/pop-ctrl.provider';
 
 
 
@@ -16,7 +16,7 @@ export class MoviesPopCtrlPage {
 
   constructor(public viewCtrl: ViewController, private popCtrlProvider: PopCtrlProvider) {
     this.optionsShowed = popCtrlProvider.tabOptions;
-    this.headerShowed = popCtrlProvider.activeTab + ' LISTS';
+    this.headerShowed = popCtrlProvider.activeTab;
   }
 
   close(event) {

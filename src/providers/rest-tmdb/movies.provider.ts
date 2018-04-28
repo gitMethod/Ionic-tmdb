@@ -7,14 +7,14 @@ import 'rxjs/add/observable/forkJoin';
 @Injectable()
 export class MoviesProvider {
 
-  constructor(public http: HttpClient) {}
-
   apiKey = 'dbb539c09bc6d9e2e9e6bf360b705e5b';
 
   popularMoviesUrl = 'https://api.themoviedb.org/3/movie/popular?api_key='+this.apiKey+'&language=en-US&page=';
   nowPlayingMoviesUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key='+this.apiKey+'&language=en-US&page=';
   topRatedMoviesUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key='+this.apiKey+'&language=en-US&page=';
   upcomingMoviesUrl = 'https://api.themoviedb.org/3/movie/upcoming?api_key='+this.apiKey+'&language=en-US&page=';
+
+  constructor(public http: HttpClient) {}
 
   getPopular(): Observable<any> {
     return Observable.forkJoin(

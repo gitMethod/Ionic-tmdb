@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid no-padding="">
+    <ion-row>
+      <ion-col col-4 col-md-3 col-xl-2 *ngFor="let poster of resultPosters">
+        <img
+          src="{{poster}}" no-margin="" style="width: 100%; margin: -5px 0" onerror="">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
