@@ -1,0 +1,8 @@
+
+<ion-list>
+  <ion-list-header>{{headerShowed}}</ion-list-header>
+  <ion-content *ngFor="let item of optionsShowed">
+    <button ion-item="" (click)="close($event)" >{{item}}</button>
+  </ion-content>
+
+</ion-list>
