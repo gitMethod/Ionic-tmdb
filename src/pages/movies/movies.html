@@ -8,9 +8,14 @@
 <ion-content>
   <ion-grid no-padding="">
     <ion-row>
-      <ion-col col-4 col-md-3 col-xl-2 *ngFor="let poster of posters">
-        <img src="{{poster}}" no-margin="" style="width: 100%; margin: -5px 0">
+      <ion-col col-4 col-md-3 col-xl-2 *ngFor="let movie of movies">
+        <img src="http://image.tmdb.org/t/p/w185/{{movie.poster_path}}" no-margin="" style="width: 100%; margin: -5px 0">
+        <div *ngIf="!movie.poster_path" class="centered">{{movie.title}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -6,8 +6,8 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class PopCtrlProvider {
 
   activeTab: any;
-  tabOptions: any[];
-  clickedOption = new BehaviorSubject('testing');
+  tabOptions: any[] = [];
+  checkedOption = new BehaviorSubject('');
 
   constructor(public http: HttpClient) {}
 

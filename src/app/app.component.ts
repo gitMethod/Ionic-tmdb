@@ -1,12 +1,13 @@
 import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform, PopoverController} from 'ionic-angular';
+import {AlertController, ModalController, Nav, Platform, PopoverController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {TabsPage} from '../pages/tabs/tabs';
-import {MoviesPopCtrlPage} from '../pages/pop-menu/pop-menu';
 import {SearchPage} from '../pages/search/search';
 import {SearchBarProvider} from '../providers/shared-data/search-bar.provider';
+import {CalendarPage} from '../pages/calendar/calendar';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,17 +20,14 @@ export class MyApp {
               statusBar: StatusBar,
               splashScreen: SplashScreen,
               private popOverCtrl: PopoverController,
-              private searchDataProvider: SearchBarProvider
+              private searchDataProvider: SearchBarProvider,
+              private alertCtrl: AlertController,
+              private modalCtrl: ModalController
               ) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
     });
-  }
-
-  presentPopover(myEvent) {
-    let popover = this.popOverCtrl.create(MoviesPopCtrlPage);
-    popover.present({ev:myEvent});
   }
 
   openSearchPage(){
@@ -45,12 +43,13 @@ export class MyApp {
   }
 
   emptyValue(){
-    this.searchDataProvider.searchString.next('');
+    this.searchDataProvider.searchString.next(' ');
   }
 
-
-
-
+  presentCalendarModal(){
+    let modal = this.modalCtrl.create(CalendarPage,{},{showBackdrop:true, enableBackdropDismiss:true, cssClass: "my-modal"});
+    modal.present();
+  }
 
 }
 

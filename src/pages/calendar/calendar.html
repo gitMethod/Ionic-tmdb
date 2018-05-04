@@ -1,0 +1,32 @@
+<ion-content padding="16px">
+
+  <ion-item no-lines="" style="font-size: 14px; margin-top: 16px">
+    <div item-left>{{knobValues.lower}}</div>
+    <div style="text-align: center; font-weight: bold">TIME</div>
+    <div item-right>{{knobValues.upper}}</div>
+  </ion-item>
+
+  <ion-item>
+    <ion-range dualKnobs="true" [(ngModel)]="knobValues" min="1990" max="2018"></ion-range>
+  </ion-item>
+
+  <ion-list radio-group="" no-lines="" [(ngModel)]="radioCheckedValue">
+    <ion-item style="padding-top: 12px; margin-bottom: 0; font-weight: bold; font-size: 14px;">{{headerShowed}}</ion-item>
+    <ion-item *ngFor="let item of optionsShowed">
+      <ion-label>{{item}}</ion-label>
+      <ion-radio value="{{item}}"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-item no-lines="">
+    <button item-left="" ion-button small clear (click)="cancel()">Cancel</button>
+    <button item-right="" ion-button small clear (click)="save()">Save</button>
+  </ion-item>
+</ion-footer>
+
+
+
+

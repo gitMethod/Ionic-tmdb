@@ -11,11 +11,12 @@ import {PeoplePage} from '../pages/people/people';
 import {TabsPage} from '../pages/tabs/tabs';
 import {HttpClientModule} from '@angular/common/http';
 import { MoviesProvider } from '../providers/rest-tmdb/movies.provider';
-import {MoviesPopCtrlPage} from '../pages/pop-menu/pop-menu';
 import { PopCtrlProvider } from '../providers/shared-data/pop-ctrl.provider';
 import {SearchPage} from '../pages/search/search';
 import { SearchBarProvider } from '../providers/shared-data/search-bar.provider';
 import { MultiSearchProvider } from '../providers/rest-tmdb/multi-search';
+import {DatePicker} from '@ionic-native/date-picker';
+import {CalendarPage} from '../pages/calendar/calendar';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,8 @@ import { MultiSearchProvider } from '../providers/rest-tmdb/multi-search';
     TvShowsPage,
     PeoplePage,
     TabsPage,
-    MoviesPopCtrlPage,
-    SearchPage
+    SearchPage,
+    CalendarPage
   ],
   imports: [
     BrowserModule,
@@ -39,8 +40,9 @@ import { MultiSearchProvider } from '../providers/rest-tmdb/multi-search';
     TvShowsPage,
     PeoplePage,
     TabsPage,
-    MoviesPopCtrlPage,
-    SearchPage
+    SearchPage,
+    CalendarPage
+
   ],
   providers: [
     StatusBar,
@@ -49,7 +51,8 @@ import { MultiSearchProvider } from '../providers/rest-tmdb/multi-search';
     MoviesProvider,
     PopCtrlProvider,
     SearchBarProvider,
-    MultiSearchProvider
+    MultiSearchProvider,
+    DatePicker
   ]
 })
 export class AppModule {}

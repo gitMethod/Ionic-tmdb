@@ -14,3 +14,48 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+
+
+/// show back button on searchbar all the time
+.searchbar-ios-cancel{
+  margin-right: 0px !important;
+  opacity: 1!important;
+  padding-left: 10px !important;
+}
+.searchbar-md .searchbar-md-cancel{
+  display: inline-flex !important;
+  background-color: white !important;
+}
+.searchbar-search-icon{
+  display: none;
+}
+
+
+/// darkened background popoover
+.backdropOpacityPopover {
+  ion-backdrop {
+    opacity: 0.4;
+  }
+}
+
+/// calendar modal
+@include media-breakpoint-down (sm) {
+  .my-modal {
+    ion-backdrop {
+      visibility: visible !important;
+    }
+    .modal-wrapper {
+      border-radius: 10px;
+      overflow: hidden;
+      top: 15%;
+      left: 10%;
+      position: absolute;
+      width: 80%;
+      height: 70%;
+    }
+  }
+}
+
+

@@ -9,18 +9,18 @@ export class MoviesProvider {
 
   apiKey = 'dbb539c09bc6d9e2e9e6bf360b705e5b';
 
-  popularMoviesUrl = 'https://api.themoviedb.org/3/movie/popular?api_key='+this.apiKey+'&language=en-US&page=';
-  nowPlayingMoviesUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key='+this.apiKey+'&language=en-US&page=';
-  topRatedMoviesUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key='+this.apiKey+'&language=en-US&page=';
-  upcomingMoviesUrl = 'https://api.themoviedb.org/3/movie/upcoming?api_key='+this.apiKey+'&language=en-US&page=';
+  popularMoviesUrl = 'https://api.themoviedb.org/3/movie/popular?api_key='+this.apiKey+'&language=en-US&popularPage=';
+  nowPlayingMoviesUrl = 'https://api.themoviedb.org/3/movie/now_playing?api_key='+this.apiKey+'&language=en-US&popularPage=';
+  topRatedMoviesUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key='+this.apiKey+'&language=en-US&popularPage=';
+  upcomingMoviesUrl = 'https://api.themoviedb.org/3/movie/upcoming?api_key='+this.apiKey+'&language=en-US&popularPage=';
 
   constructor(public http: HttpClient) {}
 
-  getPopular(): Observable<any> {
+  getPopular(page, infiniteScroll?): Observable<any> {
     return Observable.forkJoin(
-      this.http.get(this.popularMoviesUrl + 1),
-      this.http.get(this.popularMoviesUrl + 2),
-      this.http.get(this.popularMoviesUrl + 3)
+      this.http.get(this.popularMoviesUrl + page),
+      this.http.get(this.popularMoviesUrl + (page+1)),
+      this.http.get(this.popularMoviesUrl + (page+2))
     );
   }
 

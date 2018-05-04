@@ -12,7 +12,7 @@ export class MultiSearchProvider {
 
   getSearchResults(strSearch: string): Observable<any> {
     return this.http.get(
-      'https://api.themoviedb.org/3/search/multi?api_key='+this.apiKey+'&language=en-US&query='+strSearch+'&page=1&include_adult=false'
+      'https://api.themoviedb.org/3/search/multi?api_key='+this.apiKey+'&language=en-US&query='+strSearch+'&popularPage=1&include_adult=false'
     );
   }
 

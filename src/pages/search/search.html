@@ -5,12 +5,24 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid no-padding="">
-    <ion-row>
-      <ion-col col-4 col-md-3 col-xl-2 *ngFor="let poster of resultPosters">
+  <ion-list style="margin-top: 4px">
+    <ion-item *ngFor="let result of resultArr" style="padding-left: 8px">
+      <ion-thumbnail item-start style="margin: 4px 16px 4px 0; min-width: 60px">
         <img
-          src="{{poster}}" no-margin="" style="width: 100%; margin: -5px 0" onerror="">
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+          style="max-width: 54px"
+          [src]="altImage(result.media_type, result.poster_path, result.profile_path)"
+        >
+      </ion-thumbnail>
+      <h1>{{result.media_type}}</h1>
+      <h2 *ngIf="result.title">  {{result.title}}</h2>
+      <h2 *ngIf="result.name">  {{result.name}}</h2>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+
+
+
+
+
+
