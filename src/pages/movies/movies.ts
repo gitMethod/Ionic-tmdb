@@ -5,6 +5,7 @@ import {List} from '../../models/list';
 import {AppSettings} from '../../models/app-settings';
 import {ListProvider} from '../../providers/shared-data/list.provider';
 import {Tab} from '../../models/tab';
+import {convertDeepLinkEntryToJsObjectString} from '@ionic/app-scripts/dist/deep-linking/util';
 @IonicPage()
 @Component({
   selector: 'page-movies',
@@ -21,10 +22,10 @@ export class MoviesPage {
 
   constructor(private moviesProvider: MoviesProvider, private listProvider: ListProvider) {
 
-    let popularList: List = {name: 'Popular', responsePage: 1, apiUrl: AppSettings.POPULAR_ENDPOINT };
-    let topRatedList: List = {name: 'Top rated', responsePage: 1, apiUrl: AppSettings.TOP_RATED_ENDPOINT};
-    let upcomingList: List = {name: 'Up coming', responsePage: 1, apiUrl: AppSettings.UPCOMING_ENDPOINT};
-    let nowPlaying: List = {name: 'Now Playing', responsePage: 1, apiUrl: AppSettings.NOW_PLAYING_ENDPOINT};
+    let popularList: List = {name: 'Popular', responsePage: 1, apiUrl: AppSettings.MOVIES_POPULAR_ENDPOINT };
+    let topRatedList: List = {name: 'Top rated', responsePage: 1, apiUrl: AppSettings.MOVIES_TOP_RATED_ENDPOINT};
+    let upcomingList: List = {name: 'Up coming', responsePage: 1, apiUrl: AppSettings.MOVIES_UPCOMING_ENDPOINT};
+    let nowPlaying: List = {name: 'Now Playing', responsePage: 1, apiUrl: AppSettings.MOVIES_NOW_PLAYING_ENDPOINT};
 
     this.moviesCurrentTab = {
       name: 'MOVIES',
@@ -45,9 +46,7 @@ export class MoviesPage {
   loadList(list: List, infiniteScroll?) {
     this.moviesProvider.getList(list).subscribe(
       data => {
-        this.movies = this.movies.concat(data[0].results);
-        this.movies = this.movies.concat(data[1].results);
-        this.movies = this.movies.concat(data[2].results);
+        this.movies = data;
 
         if(infiniteScroll){
           infiniteScroll.complete();

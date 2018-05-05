@@ -15,6 +15,14 @@ export class MoviesProvider {
       this.http.get(list.apiUrl + list.responsePage),
       this.http.get(list.apiUrl + (list.responsePage + 1)),
       this.http.get(list.apiUrl + (list.responsePage + 2))
-    );
+    ).map(result=>{ return this.processArray(result)});
+  }
+
+  processArray(result: any){
+    let tempArray = [];
+    tempArray = tempArray.concat(result[0].results);
+    tempArray = tempArray.concat(result[1].results);
+    tempArray = tempArray.concat(result[2].results);
+    return tempArray;
   }
 }
