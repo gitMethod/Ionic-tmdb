@@ -10,11 +10,17 @@
     <ion-range dualKnobs="true" [(ngModel)]="knobValues" min="1990" max="2018"></ion-range>
   </ion-item>
 
-  <ion-list radio-group="" no-lines="" [(ngModel)]="radioCheckedValue">
-    <ion-item style="padding-top: 12px; margin-bottom: 0; font-weight: bold; font-size: 14px;">{{headerShowed}}</ion-item>
-    <ion-item *ngFor="let item of optionsShowed">
-      <ion-label>{{item}}</ion-label>
-      <ion-radio value="{{item}}"></ion-radio>
+  <ion-list radio-group="" no-lines="">
+    <ion-item
+      style="padding-top: 12px; margin-bottom: 0; font-weight: bold; font-size: 14px"
+    >{{menuCurrentTab.name}}</ion-item>
+    <ion-item *ngFor="let list of menuCurrentTab.listArray; let i=index">
+      <ion-label>{{list.name}}</ion-label>
+      <ion-radio
+         value="{{list.name}}"
+         (ionSelect)="menuIndex = i"
+         checked="{{i == menuCurrentTab.optionSelected}}"
+      ></ion-radio>
     </ion-item>
   </ion-list>
 

@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Tab} from '../../models/tab';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
-export class PopCtrlProvider {
+export class ListProvider {
 
-  activeTab: any;
-  tabOptions: any[] = [];
-  checkedOption = new BehaviorSubject('');
+  providerCurrentTab = new BehaviorSubject<Tab>(null);
 
   constructor(public http: HttpClient) {}
 

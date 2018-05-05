@@ -11,12 +11,12 @@ import {PeoplePage} from '../pages/people/people';
 import {TabsPage} from '../pages/tabs/tabs';
 import {HttpClientModule} from '@angular/common/http';
 import { MoviesProvider } from '../providers/rest-tmdb/movies.provider';
-import { PopCtrlProvider } from '../providers/shared-data/pop-ctrl.provider';
 import {SearchPage} from '../pages/search/search';
 import { SearchBarProvider } from '../providers/shared-data/search-bar.provider';
 import { MultiSearchProvider } from '../providers/rest-tmdb/multi-search';
 import {DatePicker} from '@ionic-native/date-picker';
 import {CalendarPage} from '../pages/calendar/calendar';
+import { ListProvider } from '../providers/shared-data/list.provider';
 
 @NgModule({
   declarations: [
@@ -49,10 +49,10 @@ import {CalendarPage} from '../pages/calendar/calendar';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MoviesProvider,
-    PopCtrlProvider,
     SearchBarProvider,
     MultiSearchProvider,
-    DatePicker
+    DatePicker,
+    ListProvider
   ]
 })
 export class AppModule {}

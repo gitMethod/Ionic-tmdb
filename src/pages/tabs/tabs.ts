@@ -1,9 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, Tab, Tabs} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Tabs} from 'ionic-angular';
 import {MoviesPage} from '../movies/movies';
 import {PeoplePage} from '../people/people';
 import {TvShowsPage} from '../tv-shows/tv-shows';
-import {PopCtrlProvider} from '../../providers/shared-data/pop-ctrl.provider';
 
 
 @IonicPage()
@@ -19,10 +18,6 @@ export class TabsPage{
   tab2Root = TvShowsPage;
   tab3Root = PeoplePage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private popCtrl: PopCtrlProvider) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  tabSelected(tab: Tab) {
-    this.popCtrl.activeTab = tab.tabTitle;
-    console.log(tab.tabTitle);
-  }
 }

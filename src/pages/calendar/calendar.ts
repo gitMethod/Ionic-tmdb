@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {PopCtrlProvider} from '../../providers/shared-data/pop-ctrl.provider';
+import {ListProvider} from '../../providers/shared-data/list.provider';
+import {Tab} from '../../models/tab';
 
 
 @IonicPage()
@@ -15,14 +16,12 @@ export class CalendarPage {
     lower:1990
   };
 
-  optionsShowed: any[];
-  headerShowed: any;
-  radioCheckedValue: any;
+  menuCurrentTab: Tab;
+  menuIndex: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private popCtrlProvider: PopCtrlProvider) {
-    this.optionsShowed = popCtrlProvider.tabOptions;
-    this.headerShowed = popCtrlProvider.activeTab;
-    this.radioCheckedValue = popCtrlProvider.checkedOption.getValue();
+  constructor(public navCtrl: NavController, public navParams: NavParams, private listProvider: ListProvider) {
+
+    this.menuCurrentTab = listProvider.providerCurrentTab.getValue();
   }
 
   cancel() {
@@ -30,7 +29,9 @@ export class CalendarPage {
   }
 
   save() {
-    this.popCtrlProvider.checkedOption.next(this.radioCheckedValue);
+    this.menuCurrentTab.optionSelected = this.menuIndex;
+    this.menuCurrentTab.listArray[this.menuIndex].responsePage = 1;
+    this.listProvider.providerCurrentTab.next(this.menuCurrentTab);
     this.navCtrl.pop();
   }
 
