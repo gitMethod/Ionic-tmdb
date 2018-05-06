@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { CalendarPage } from './calendar';
+import { CalendarPage } from './filterModal';
 
 @NgModule({
   declarations: [

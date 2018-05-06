@@ -13,9 +13,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { MoviesProvider } from '../providers/rest-tmdb/movies.provider';
 import {SearchPage} from '../pages/search/search';
 import { SearchBarProvider } from '../providers/shared-data/search-bar.provider';
-import { MultiSearchProvider } from '../providers/rest-tmdb/multi-search';
+import { MultiSearchProvider } from '../providers/rest-tmdb/search.provider';
 import {DatePicker} from '@ionic-native/date-picker';
-import {CalendarPage} from '../pages/calendar/calendar';
+import {CalendarPage} from '../pages/filterModal/filterModal';
 import { ListProvider } from '../providers/shared-data/list.provider';
 
 @NgModule({

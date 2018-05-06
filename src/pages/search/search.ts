@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {SearchBarProvider} from '../../providers/shared-data/search-bar.provider';
-import {MultiSearchProvider} from '../../providers/rest-tmdb/multi-search';
+import {MultiSearchProvider} from '../../providers/rest-tmdb/search.provider';
 import {Subscription} from 'rxjs/Subscription';
 
 @IonicPage()
@@ -29,10 +29,7 @@ export class SearchPage {
   loadSearchResults(val: string) {
     if (val){
       this.multiSearchProvider.getSearchResults(val).subscribe(
-        data => {
-          this.resultArr = data.results;
-          console.log(this.resultArr);
-        },
+        data => { this.resultArr = data},
         err => {console.log(err)}
       )
     } else {
@@ -40,32 +37,8 @@ export class SearchPage {
     }
   }
 
-  altImage(type, moviePath, personPath){
-    if( type === 'movie'){
-      if(moviePath === null){
-        return 'assets/imgs/movie.png'
-      } else {
-        return "http://image.tmdb.org/t/p/w185/"+moviePath
-      }
-    } else if( type === 'person'){
-      if(personPath === null){
-        return 'assets/imgs/person.png'
-      } else {
-        return "http://image.tmdb.org/t/p/w185//"+personPath
-      }
-    } else if( type === 'tv'){
-      if(moviePath == null){
-        return 'assets/imgs/television.png'
-      } else {
-        return "http://image.tmdb.org/t/p/w185//"+moviePath
-      }
-    }
-  }
-
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }
-
-
 
 }

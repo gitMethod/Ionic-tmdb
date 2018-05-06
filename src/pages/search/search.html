@@ -10,7 +10,7 @@
       <ion-thumbnail item-start style="margin: 4px 16px 4px 0; min-width: 60px">
         <img
           style="max-width: 54px"
-          [src]="altImage(result.media_type, result.poster_path, result.profile_path)"
+          src="{{result.poster_path}}"
         >
       </ion-thumbnail>
       <h1>{{result.media_type}}</h1>

@@ -7,7 +7,7 @@ import {Tab} from '../../models/tab';
 @IonicPage()
 @Component({
   selector: 'page-calendar',
-  templateUrl: 'calendar.html',
+  templateUrl: 'filterModal.html',
 })
 export class CalendarPage {
 
@@ -16,12 +16,12 @@ export class CalendarPage {
     lower:1990
   };
 
-  menuCurrentTab: Tab;
+  showedTab: Tab;
   menuIndex: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private listProvider: ListProvider) {
-
-    this.menuCurrentTab = listProvider.providerCurrentTab.getValue();
+    this.showedTab = listProvider.providerCurrentTab.getValue();
+    this.menuIndex = listProvider.providerCurrentTab.getValue().listShowedIdx;
   }
 
   cancel() {
@@ -29,9 +29,11 @@ export class CalendarPage {
   }
 
   save() {
-    this.menuCurrentTab.optionSelected = this.menuIndex;
-    this.menuCurrentTab.listArray[this.menuIndex].responsePage = 1;
-    this.listProvider.providerCurrentTab.next(this.menuCurrentTab);
+    if(this.menuIndex != this.listProvider.providerCurrentTab.getValue().listShowedIdx){
+      this.showedTab.listShowedIdx = this.menuIndex;
+      this.showedTab.listArray[this.menuIndex].responsePage = 1;
+      this.listProvider.providerCurrentTab.next(this.showedTab);
+    }
     this.navCtrl.pop();
   }
 

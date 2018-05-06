@@ -1,12 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
-import {AlertController, ModalController, Nav, Platform, PopoverController} from 'ionic-angular';
+import { ModalController, Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {TabsPage} from '../pages/tabs/tabs';
 import {SearchPage} from '../pages/search/search';
 import {SearchBarProvider} from '../providers/shared-data/search-bar.provider';
-import {CalendarPage} from '../pages/calendar/calendar';
+import {CalendarPage} from '../pages/filterModal/filterModal';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,9 +19,7 @@ export class MyApp {
   constructor(platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
-              private popOverCtrl: PopoverController,
               private searchDataProvider: SearchBarProvider,
-              private alertCtrl: AlertController,
               private modalCtrl: ModalController
               ) {
     platform.ready().then(() => {

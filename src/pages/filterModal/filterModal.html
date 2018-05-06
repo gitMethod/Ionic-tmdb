@@ -13,13 +13,13 @@
   <ion-list radio-group="" no-lines="">
     <ion-item
       style="padding-top: 12px; margin-bottom: 0; font-weight: bold; font-size: 14px"
-    >{{menuCurrentTab.name}}</ion-item>
-    <ion-item *ngFor="let list of menuCurrentTab.listArray; let i=index">
+    >{{showedTab.name}}</ion-item>
+    <ion-item *ngFor="let list of showedTab.listArray; let i=index">
       <ion-label>{{list.name}}</ion-label>
       <ion-radio
          value="{{list.name}}"
          (ionSelect)="menuIndex = i"
-         checked="{{i == menuCurrentTab.optionSelected}}"
+         checked="{{i == showedTab.listShowedIdx}}"
       ></ion-radio>
     </ion-item>
   </ion-list>

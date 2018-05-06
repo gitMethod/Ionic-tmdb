@@ -5,7 +5,8 @@ import {List} from '../../models/list';
 import {AppSettings} from '../../models/app-settings';
 import {ListProvider} from '../../providers/shared-data/list.provider';
 import {Tab} from '../../models/tab';
-import {convertDeepLinkEntryToJsObjectString} from '@ionic/app-scripts/dist/deep-linking/util';
+import {connectableObservableDescriptor} from 'rxjs/observable/ConnectableObservable';
+
 @IonicPage()
 @Component({
   selector: 'page-movies',
@@ -14,10 +15,9 @@ import {convertDeepLinkEntryToJsObjectString} from '@ionic/app-scripts/dist/deep
 export class MoviesPage {
 
   movies = [];
-  maximumPages = 1000;
-
-  moviesCurrentList: List;
-  moviesCurrentTab: Tab;
+  moviesListShowed: List;
+  moviesTab: Tab;
+  infiniteScrollStatus = true;
 
 
   constructor(private moviesProvider: MoviesProvider, private listProvider: ListProvider) {
@@ -27,42 +27,41 @@ export class MoviesPage {
     let upcomingList: List = {name: 'Up coming', responsePage: 1, apiUrl: AppSettings.MOVIES_UPCOMING_ENDPOINT};
     let nowPlaying: List = {name: 'Now Playing', responsePage: 1, apiUrl: AppSettings.MOVIES_NOW_PLAYING_ENDPOINT};
 
-    this.moviesCurrentTab = {
+    this.moviesTab = {
       name: 'MOVIES',
       listArray: [popularList, topRatedList, upcomingList, nowPlaying],
-      optionSelected: 0
+      listShowedIdx: 0
     };
 
-    this.listProvider.providerCurrentTab.next(this.moviesCurrentTab);
+    this.listProvider.providerCurrentTab.next(this.moviesTab);
 
     this.listProvider.providerCurrentTab.subscribe((value) =>{
-      this.moviesCurrentTab = value;
-      this.moviesCurrentList = value.listArray[value.optionSelected];
+      this.moviesTab = value;
+      this.moviesListShowed = value.listArray[value.listShowedIdx];
       this.movies = [];
-      this.loadList(this.moviesCurrentList);
+      this.loadList();
     });
   }
 
-  loadList(list: List, infiniteScroll?) {
-    this.moviesProvider.getList(list).subscribe(
+  loadList(infiniteScroll?) {
+    this.moviesProvider.getList(this.moviesListShowed).subscribe(
       data => {
-        this.movies = data;
+        this.movies = this.movies.concat(data);
+        console.log(this.moviesListShowed.responsePage);
+        this.infiniteScrollStatus = this.moviesListShowed.responsePage < 1000;
 
-        if(infiniteScroll){
-          infiniteScroll.complete();
+        if (infiniteScroll) {
+          infiniteScroll.complete()
         }
       },
-      err => {console.log(err)},
-    );
+      err => {
+        console.log('something wrong '+ err.toString())
+      }
+    )
   }
 
   loadMore(infiniteScroll){
-    this.moviesCurrentList.responsePage += 3;
-    this.loadList(this.moviesCurrentList, infiniteScroll);
-
-    if(this.moviesCurrentList.responsePage >= this.maximumPages){
-      infiniteScroll.enable(false);
-    }
+    this.moviesListShowed.responsePage += 3;
+    this.loadList(infiniteScroll);
   }
-
 }
