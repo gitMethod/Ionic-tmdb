@@ -5,7 +5,6 @@ import {List} from '../../models/list';
 import {AppSettings} from '../../models/app-settings';
 import {ListProvider} from '../../providers/shared-data/list.provider';
 import {Tab} from '../../models/tab';
-import {connectableObservableDescriptor} from 'rxjs/observable/ConnectableObservable';
 
 @IonicPage()
 @Component({
@@ -18,7 +17,6 @@ export class MoviesPage {
   moviesListShowed: List;
   moviesTab: Tab;
   infiniteScrollStatus = true;
-
 
   constructor(private moviesProvider: MoviesProvider, private listProvider: ListProvider) {
 
@@ -43,25 +41,35 @@ export class MoviesPage {
     });
   }
 
+  counter: number = 0;
+
   loadList(infiniteScroll?) {
+
     this.moviesProvider.getList(this.moviesListShowed).subscribe(
       data => {
+        this.moviesListShowed.responsePage += 3;
+        this.counter += data.length;
         this.movies = this.movies.concat(data);
-        console.log(this.moviesListShowed.responsePage);
-        this.infiniteScrollStatus = this.moviesListShowed.responsePage < 1000;
 
-        if (infiniteScroll) {
-          infiniteScroll.complete()
+        if(this.counter < 12)
+        {
+          this.loadList(infiniteScroll);
+        } else {
+          this.counter = 0;
+          if (infiniteScroll) {
+            infiniteScroll.complete()
+          }
         }
+
+        this.infiniteScrollStatus = this.moviesListShowed.responsePage < 1000;
       },
       err => {
-        console.log('something wrong '+ err.toString())
+        console.log( err.toString());
       }
     )
   }
 
   loadMore(infiniteScroll){
-    this.moviesListShowed.responsePage += 3;
     this.loadList(infiniteScroll);
   }
 }

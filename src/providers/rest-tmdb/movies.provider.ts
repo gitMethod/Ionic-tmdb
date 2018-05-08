@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/observable/forkJoin';
 import {List} from '../../models/list';
+import 'rxjs/add/operator/delay';
 
 @Injectable()
 export class MoviesProvider {
@@ -15,9 +16,10 @@ export class MoviesProvider {
       this.http.get(list.apiUrl + list.responsePage),
       this.http.get(list.apiUrl + (list.responsePage + 1)),
       this.http.get(list.apiUrl + (list.responsePage + 2))
+
     ).map(result=>{
-      return this.processArray(result);
-    });
+      return this.processArray(result)
+    }).delay(50);
   }
 
   processArray(result: any){
@@ -25,8 +27,7 @@ export class MoviesProvider {
     tempArray = tempArray.concat(result[0].results);
     tempArray = tempArray.concat(result[1].results);
     tempArray = tempArray.concat(result[2].results);
-
-    //tempArray = this.filterByTime(tempArray);
+    tempArray = this.filterByTime(tempArray);
     this.updatePathImg(tempArray);
     console.log(tempArray);
     return tempArray;
@@ -43,7 +44,7 @@ export class MoviesProvider {
   }
 
   filterByTime(array: any[]){
-    let tempArray = array.filter(obj => obj.release_date > '1990' && obj.release_date < '1990-12-31');
+    let tempArray = array.filter(obj => obj.release_date > '1950' && obj.release_date < '1960-12-31');
     return tempArray;
   }
 }

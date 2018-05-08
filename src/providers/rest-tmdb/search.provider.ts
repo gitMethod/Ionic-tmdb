@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {AppSettings} from '../../models/app-settings';
-import {connectableObservableDescriptor} from 'rxjs/observable/ConnectableObservable';
 
 @Injectable()
 export class MultiSearchProvider {
