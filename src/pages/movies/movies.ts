@@ -51,7 +51,8 @@ export class MoviesPage {
         this.counter += data.length;
         this.movies = this.movies.concat(data);
 
-        if(this.counter < 12)
+
+        if(this.counter < 9)
         {
           this.loadList(infiniteScroll);
         } else {
@@ -60,16 +61,14 @@ export class MoviesPage {
             infiniteScroll.complete()
           }
         }
-
-        this.infiniteScrollStatus = this.moviesListShowed.responsePage < 1000;
       },
       err => {
-        console.log( err.toString());
+        console.log( err );
+      },
+      ()=> {
+
       }
     )
   }
 
-  loadMore(infiniteScroll){
-    this.loadList(infiniteScroll);
-  }
 }

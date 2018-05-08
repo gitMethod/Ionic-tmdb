@@ -19,7 +19,7 @@ export class MoviesProvider {
 
     ).map(result=>{
       return this.processArray(result)
-    }).delay(50);
+    }).delay(100);
   }
 
   processArray(result: any){
@@ -44,7 +44,7 @@ export class MoviesProvider {
   }
 
   filterByTime(array: any[]){
-    let tempArray = array.filter(obj => obj.release_date > '1950' && obj.release_date < '1960-12-31');
+    let tempArray = array.filter(obj => obj.release_date > '1900' && obj.release_date < '1950-12-31');
     return tempArray;
   }
 }

@@ -15,7 +15,11 @@
     </ion-row>
   </ion-grid>
 
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)" [enabled]="infiniteScrollStatus">
+  <ion-infinite-scroll
+    (ionInfinite)="loadList($event)"
+    [enabled]="infiniteScrollStatus"
+    threshold="100%"
+  >
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
