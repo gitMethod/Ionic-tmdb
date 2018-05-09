@@ -7,7 +7,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-range dualKnobs="true" [(ngModel)]="knobValues" min="1900" max="2018" [step]="5"></ion-range>
+    <ion-range dualKnobs="true" [(ngModel)]="knobValues" min="1900" max="2018" [step]="10" [pin]="true" [snaps]="true"></ion-range>
   </ion-item>
 
   <ion-list radio-group="" no-lines="">
@@ -18,7 +18,7 @@
       <ion-label>{{list.name}}</ion-label>
       <ion-radio
          value="{{list.name}}"
-         (ionSelect)="menuIndex = i"
+         (ionSelect)="selectList(i)"
          checked="{{i == showedTab.listShowedIdx}}"
       ></ion-radio>
     </ion-item>

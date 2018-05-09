@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, List, NavController, NavParams} from 'ionic-angular';
 import {ListProvider} from '../../providers/shared-data/list.provider';
 import {Tab} from '../../models/tab';
+import {MovieList} from '../../models/movie-list';
 
 
 @IonicPage()
@@ -11,17 +12,30 @@ import {Tab} from '../../models/tab';
 })
 export class CalendarPage {
 
-  knobValues: any = {
-    upper:2018,
-    lower:1990
-  };
-
+  showedList: MovieList;
   showedTab: Tab;
   menuIndex: number;
+
+  knobValues: any = {
+    upper: 0,
+    lower: 0
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private listProvider: ListProvider) {
     this.showedTab = listProvider.providerCurrentTab.getValue();
     this.menuIndex = listProvider.providerCurrentTab.getValue().listShowedIdx;
+    this.showedList = this.showedTab.listArray[this.showedTab.listShowedIdx];
+    this.knobValues.upper = this.showedList.maxRange;
+    this.knobValues.lower = this.showedList.minRange;
+  }
+
+  selectList(idx){
+    this.showedList = this.showedTab.listArray[idx];
+    this.knobValues = {
+      upper: this.showedList.maxRange,
+      lower: this.showedList.minRange
+    };
+    this.menuIndex = idx;
   }
 
   cancel() {
@@ -29,9 +43,15 @@ export class CalendarPage {
   }
 
   save() {
-    if(this.menuIndex != this.listProvider.providerCurrentTab.getValue().listShowedIdx){
+    if(this.menuIndex != this.showedTab.listShowedIdx ||
+       this.showedList.maxRange != this.knobValues.upper ||
+       this.showedList.minRange != this.knobValues.lower
+    ){
       this.showedTab.listShowedIdx = this.menuIndex;
-      this.showedTab.listArray[this.menuIndex].responsePage = 1;
+      this.showedList.responsePage = 1;
+      this.showedList.maxRange = this.knobValues.upper;
+      this.showedList.minRange = this.knobValues.lower;
+      this.showedTab.listArray[this.menuIndex] = this.showedList;
       this.listProvider.providerCurrentTab.next(this.showedTab);
     }
     this.navCtrl.pop();

@@ -1,7 +1,7 @@
-import {List} from './list';
+import {MovieList} from './movie-list';
 
 export interface Tab {
   name: string;
-  listArray: List[];
+  listArray: MovieList[];
   listShowedIdx: number;
 }
