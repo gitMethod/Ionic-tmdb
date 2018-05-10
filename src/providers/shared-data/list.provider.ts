@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Tab} from '../../models/tab';
+import {AppTab} from '../../models/app-tab';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ListProvider {
 
-  providerCurrentTab = new BehaviorSubject<Tab>(null);
+  providerTabList: AppTab[] = [];
+  providerCurrentTab = new BehaviorSubject<AppTab>(null);
 
   constructor(public http: HttpClient) {}
 

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {IonicPage, List, NavController, NavParams} from 'ionic-angular';
 import {ListProvider} from '../../providers/shared-data/list.provider';
-import {Tab} from '../../models/tab';
-import {MovieList} from '../../models/movie-list';
+import {AppTab} from '../../models/app-tab';
+import {AppList} from '../../models/app-list';
 
 
 @IonicPage()
@@ -12,8 +12,8 @@ import {MovieList} from '../../models/movie-list';
 })
 export class CalendarPage {
 
-  showedList: MovieList;
-  showedTab: Tab;
+  showedList: AppList;
+  showedTab: AppTab;
   menuIndex: number;
 
   knobValues: any = {

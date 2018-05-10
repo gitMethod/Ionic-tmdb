@@ -1,13 +1,26 @@
 
 <ion-header>
-
   <ion-navbar>
     <ion-title></ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content>
+  <ion-grid no-padding="">
+    <ion-row>
+      <ion-col col-4 col-md-3 col-xl-2 *ngFor="let tv of tvs">
+        <img src="{{tv.poster_path}}" no-margin="" style="min-height: 100%; min-width: 100%">
+        <div *ngIf="tv.poster_path.indexOf('assets') !== -1" class="centered">{{tv.name}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-<ion-content padding>
-
+  <ion-infinite-scroll
+    (ionInfinite)="loadList($event)"
+    [enabled]="infiniteScrollStatus"
+    threshold="90%"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+

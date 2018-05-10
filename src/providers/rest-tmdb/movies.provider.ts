@@ -3,28 +3,26 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/observable/forkJoin';
-import {MovieList} from '../../models/movie-list';
+import {AppList} from '../../models/app-list';
 import 'rxjs/add/operator/delay';
-import {observable} from 'rxjs/symbol/observable';
-import {List} from 'ionic-angular';
+
 
 @Injectable()
 export class MoviesProvider {
 
   constructor(public http: HttpClient) {}
 
-  getList(movieList: MovieList): Observable<any> {
+  getList(appList: AppList, tabName: string): Observable<any> {
     return Observable.forkJoin(
-      this.http.get(movieList.apiUrl + movieList.responsePage),
-      this.http.get(movieList.apiUrl + (movieList.responsePage + 1)),
-      this.http.get(movieList.apiUrl + (movieList.responsePage + 2))
+      this.http.get(appList.apiUrl + appList.responsePage),
+      this.http.get(appList.apiUrl + (appList.responsePage + 1)),
+      this.http.get(appList.apiUrl + (appList.responsePage + 2))
 
     ).map(result=>{
       let tmpArray = this.concatArray(result);
+      tmpArray = this.removeNullItems(tmpArray);
       tmpArray = this.updatePathImg(tmpArray);
-      tmpArray = this.filterByTime(tmpArray, movieList);
-      console.log(tmpArray);
-
+      tmpArray = this.filterByTime(tmpArray, appList, tabName);
       return tmpArray;
     }).delay(100);
   }
@@ -48,9 +46,24 @@ export class MoviesProvider {
     return array;
   }
 
-  filterByTime(array: any[], movieList: MovieList){
-    return  array.filter(obj =>
-      obj.release_date > movieList.minRange.toString() && obj.release_date < movieList.maxRange.toString()+'1231');
+
+  removeNullItems(array: any[]) {
+    console.log(array);
+    for (let i = array.length - 1; i >= 0; --i) {
+      if (!array[i]) {
+        array.splice(i, 1);
+      }
+    }
+    return array;
+  }
+
+  filterByTime(array: any[], appList: AppList, tabName: string){
+    if( tabName === 'MOVIES'){
+      return  array.filter(obj =>
+        obj.release_date > appList.minRange.toString() && obj.release_date < appList.maxRange.toString()+'1231');
+    } else if ( tabName === 'TV')
+      return  array.filter(obj =>
+        obj.first_air_date > appList.minRange.toString() && obj.first_air_date < appList.maxRange.toString()+'1231');
   }
 
 }

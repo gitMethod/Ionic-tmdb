@@ -1,10 +1,10 @@
 import { Component} from '@angular/core';
 import {IonicPage} from 'ionic-angular';
 import {MoviesProvider} from '../../providers/rest-tmdb/movies.provider';
-import {MovieList} from '../../models/movie-list';
+import {AppList} from '../../models/app-list';
 import {AppSettings} from '../../models/app-settings';
 import {ListProvider} from '../../providers/shared-data/list.provider';
-import {Tab} from '../../models/tab';
+import {AppTab} from '../../models/app-tab';
 
 @IonicPage()
 @Component({
@@ -14,28 +14,28 @@ import {Tab} from '../../models/tab';
 export class MoviesPage {
 
   movies = [];
-  moviesListShowed: MovieList;
-  moviesTab: Tab;
+  moviesListShowed: AppList;
+  moviesTab: AppTab;
   infiniteScrollStatus = true;
 
   constructor(private moviesProvider: MoviesProvider, private listProvider: ListProvider) {
 
-    let popularList: MovieList = {
+    let moviesPopular: AppList = {
       name: 'Popular', responsePage: 1, apiUrl: AppSettings.MOVIES_POPULAR_ENDPOINT,
       maxRange:(new Date()).getFullYear(), minRange: 1900 };
-    let topRatedList: MovieList = {
+    let moviesTopRated: AppList = {
       name: 'Top rated', responsePage: 1, apiUrl: AppSettings.MOVIES_TOP_RATED_ENDPOINT,
       maxRange:(new Date()).getFullYear(), minRange: 1900};
-    let upcomingList: MovieList = {
+    let moviesUpcoming: AppList = {
       name: 'Up coming', responsePage: 1, apiUrl: AppSettings.MOVIES_UPCOMING_ENDPOINT,
       maxRange:(new Date()).getFullYear(), minRange: 1900};
-    let nowPlaying: MovieList = {
+    let moviesNowPlaying: AppList = {
       name: 'Now Playing', responsePage: 1, apiUrl: AppSettings.MOVIES_NOW_PLAYING_ENDPOINT,
       maxRange:(new Date()).getFullYear(), minRange: 1900};
 
     this.moviesTab = {
       name: 'MOVIES',
-      listArray: [popularList, topRatedList, upcomingList, nowPlaying],
+      listArray: [moviesPopular, moviesTopRated, moviesUpcoming, moviesNowPlaying],
       listShowedIdx: 0
     };
 
@@ -52,7 +52,7 @@ export class MoviesPage {
   counter: number = 0;
 
   loadList(infiniteScroll?) {
-    this.moviesProvider.getList(this.moviesListShowed).subscribe(
+    this.moviesProvider.getList(this.moviesListShowed, this.moviesTab.name).subscribe(
       data => {
         this.moviesListShowed.responsePage += 3;
         this.counter += data.length;
