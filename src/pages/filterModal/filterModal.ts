@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {IonicPage, List, NavController, NavParams} from 'ionic-angular';
-import {ListProvider} from '../../providers/shared-data/list.provider';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {ActiveTab} from '../../providers/shared-data/active-tab';
 import {AppTab} from '../../models/app-tab';
 import {AppList} from '../../models/app-list';
+import {MoviesData} from '../../providers/shared-data/movies-data';
 
 
 @IonicPage()
@@ -10,7 +11,7 @@ import {AppList} from '../../models/app-list';
   selector: 'page-calendar',
   templateUrl: 'filterModal.html',
 })
-export class CalendarPage {
+export class FilterModalPage {
 
   showedList: AppList;
   showedTab: AppTab;
@@ -21,15 +22,17 @@ export class CalendarPage {
     lower: 0
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private listProvider: ListProvider) {
-    this.showedTab = listProvider.providerCurrentTab.getValue();
-    this.menuIndex = listProvider.providerCurrentTab.getValue().listShowedIdx;
-    this.showedList = this.showedTab.listArray[this.showedTab.listShowedIdx];
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private activeTab: ActiveTab,
+              private moviesData: MoviesData) {
+    this.showedTab = activeTab.activeTab;
+    this.menuIndex = activeTab.activeTab.listShowedIdx;
+    this.showedList = this.showedTab.listArray[this.menuIndex];
     this.knobValues.upper = this.showedList.maxRange;
     this.knobValues.lower = this.showedList.minRange;
   }
 
-  selectList(idx){
+  checkedRadio(idx){
     this.showedList = this.showedTab.listArray[idx];
     this.knobValues = {
       upper: this.showedList.maxRange,
@@ -52,9 +55,15 @@ export class CalendarPage {
       this.showedList.maxRange = this.knobValues.upper;
       this.showedList.minRange = this.knobValues.lower;
       this.showedTab.listArray[this.menuIndex] = this.showedList;
-      this.listProvider.providerCurrentTab.next(this.showedTab);
+      this.saveToObservable();
     }
     this.navCtrl.pop();
+  }
+
+  saveToObservable(){
+    if (this.showedList.name === 'Popular'){
+      this.moviesData.moviesObservable.next(this.showedTab)
+    }
   }
 
 }

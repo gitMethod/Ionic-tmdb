@@ -4,10 +4,9 @@ import {AppTab} from '../../models/app-tab';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
-export class ListProvider {
+export class ActiveTab {
 
-  providerTabList: AppTab[] = [];
-  providerCurrentTab = new BehaviorSubject<AppTab>(null);
+  activeTab: AppTab;
 
   constructor(public http: HttpClient) {}
 

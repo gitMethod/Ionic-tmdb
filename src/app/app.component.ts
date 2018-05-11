@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {TabsPage} from '../pages/tabs/tabs';
 import {SearchPage} from '../pages/search/search';
 import {SearchBarProvider} from '../providers/shared-data/search-bar.provider';
-import {CalendarPage} from '../pages/filterModal/filterModal';
+import {FilterModalPage} from '../pages/filterModal/filterModal';
 
 @Component({
   templateUrl: 'app.html'
@@ -45,7 +45,7 @@ export class MyApp {
   }
 
   presentCalendarModal(){
-    let modal = this.modalCtrl.create(CalendarPage,{},{showBackdrop:true, enableBackdropDismiss:true, cssClass: "my-modal"});
+    let modal = this.modalCtrl.create(FilterModalPage,{},{showBackdrop:true, enableBackdropDismiss:true, cssClass: "my-modal"});
     modal.present();
   }
 

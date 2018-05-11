@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { CalendarPage } from './filterModal';
+import { FilterModalPage } from './filterModal';
 
 @NgModule({
   declarations: [
-    CalendarPage,
+    FilterModalPage,
   ],
   imports: [
-    IonicPageModule.forChild(CalendarPage),
+    IonicPageModule.forChild(FilterModalPage),
   ],
 })
 export class CalendarPageModule {

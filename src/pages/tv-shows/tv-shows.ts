@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {AppList} from '../../models/app-list';
 import {AppTab} from '../../models/app-tab';
-import {AppSettings} from '../../models/app-settings';
-import {ListProvider} from '../../providers/shared-data/list.provider';
+import {ActiveTab} from '../../providers/shared-data/active-tab';
 import {MoviesProvider} from '../../providers/rest-tmdb/movies.provider';
 
 @IonicPage()
@@ -18,35 +17,10 @@ export class TvShowsPage {
   tvsTab: AppTab;
   infiniteScrollStatus = true;
 
-  constructor(private moviesProvider: MoviesProvider, private listProvider: ListProvider) {
+  constructor(private moviesProvider: MoviesProvider, private listProvider: ActiveTab) {
 
-    let tvPopular: AppList = {
-      name: 'Popular', responsePage: 1, apiUrl: AppSettings.TV_POPULAR,
-      maxRange:(new Date()).getFullYear(), minRange: 1900 };
-    let tvTopRated: AppList = {
-      name: 'Top rated', responsePage: 1, apiUrl: AppSettings.TV_TOP_RATED,
-      maxRange:(new Date()).getFullYear(), minRange: 1900};
-    let tvOnTheAir: AppList = {
-      name: 'On the air', responsePage: 1, apiUrl: AppSettings.TV_ON_THE_AIR,
-      maxRange:(new Date()).getFullYear(), minRange: 1900};
-    let tvAiringToday: AppList = {
-      name: 'Airing Today', responsePage: 1, apiUrl: AppSettings.TV_AIRING_TODAY,
-      maxRange:(new Date()).getFullYear(), minRange: 1900};
 
-    this.tvsTab = {
-      name: 'TV',
-      listArray: [tvPopular, tvTopRated, tvOnTheAir, tvAiringToday],
-      listShowedIdx: 0
-    };
 
-    this.listProvider.providerCurrentTab.next(this.tvsTab);
-
-    this.listProvider.providerCurrentTab.subscribe((value) =>{
-      this.tvsTab = value;
-      this.tvListShowed = value.listArray[value.listShowedIdx];
-      this.tvs = [];
-      this.loadList();
-    });
   }
 
   counter: number = 0;
