@@ -31,7 +31,7 @@ export class MultiSearchProvider {
     for (let item of array) {
       if (item.poster_path == null) {
         switch (item.media_type) {
-          case ('tv'):
+          case ('tvs'):
             item.poster_path = 'assets/imgs/tvposter.jpg';
             break;
           case ('person'):

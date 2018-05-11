@@ -10,10 +10,10 @@ import {TvShowsPage} from '../pages/tv-shows/tv-shows';
 import {PeoplePage} from '../pages/people/people';
 import {TabsPage} from '../pages/tabs/tabs';
 import {HttpClientModule} from '@angular/common/http';
-import { MoviesProvider } from '../providers/rest-tmdb/movies.provider';
+import { ListsRest } from '../providers/rest-tmdb/lists-rest';
 import {SearchPage} from '../pages/search/search';
 import { SearchBarProvider } from '../providers/shared-data/search-bar.provider';
-import { MultiSearchProvider } from '../providers/rest-tmdb/search.provider';
+import { MultiSearchProvider } from '../providers/rest-tmdb/search-rest';
 import {DatePicker} from '@ionic-native/date-picker';
 import {FilterModalPage} from '../pages/filterModal/filterModal';
 import { ActiveData } from '../providers/shared-data/active-data';
@@ -50,7 +50,7 @@ import { TvDataProvider } from '../providers/shared-data/tv-data';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MoviesProvider,
+    ListsRest,
     SearchBarProvider,
     MultiSearchProvider,
     DatePicker,

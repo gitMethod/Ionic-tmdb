@@ -8,27 +8,27 @@ import {AppList} from '../../models/app-list';
 @Injectable()
 export class TvDataProvider {
 
-  moviesTab: AppTab;
-  moviesObservable: BehaviorSubject<AppTab>;
+  tvTab: AppTab;
+  tvObservable: BehaviorSubject<AppTab>;
 
-  moviesPopular: AppList;
-  moviesTopRated: AppList;
-  moviesUpcoming: AppList;
-  moviesNowPlaying: AppList;
+  tvPopular: AppList;
+  tvTopRated: AppList;
+  tvAiringToday: AppList;
+  tvOnTheAir: AppList;
 
   constructor(public http: HttpClient) {
 
-    this.moviesPopular = new AppList('Popular', AppSettings.MOVIES_POPULAR_ENDPOINT);
-    this.moviesTopRated = new AppList('Top rated', AppSettings.MOVIES_TOP_RATED_ENDPOINT);
-    this.moviesUpcoming = new AppList('Up coming', AppSettings.MOVIES_UPCOMING_ENDPOINT);
-    this.moviesNowPlaying = new AppList('Now Playing', AppSettings.MOVIES_NOW_PLAYING_ENDPOINT);
+    this.tvPopular = new AppList('Popular', AppSettings.TV_POPULAR);
+    this.tvTopRated = new AppList('Top rated', AppSettings.TV_TOP_RATED);
+    this.tvAiringToday = new AppList('Airing today', AppSettings.TV_AIRING_TODAY);
+    this.tvOnTheAir = new AppList('On the air', AppSettings.TV_ON_THE_AIR);
 
-    this.moviesTab = {
-      name: 'MOVIES',
-      listArray: [this.moviesPopular, this.moviesTopRated, this.moviesUpcoming, this.moviesNowPlaying],
+    this.tvTab = {
+      name: 'TV',
+      listArray: [this.tvPopular, this.tvTopRated, this.tvAiringToday, this.tvOnTheAir],
     };
 
-    this.moviesObservable = new BehaviorSubject<AppTab>(this.moviesTab);
+    this.tvObservable = new BehaviorSubject<AppTab>(this.tvTab);
   }
 
 }

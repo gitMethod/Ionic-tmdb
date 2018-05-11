@@ -8,7 +8,7 @@ import 'rxjs/add/operator/delay';
 
 
 @Injectable()
-export class MoviesProvider {
+export class ListsRest {
 
   constructor(public http: HttpClient) {}
 
@@ -38,7 +38,13 @@ export class MoviesProvider {
   updatePathImg(array: any[]) {
     for (let item of array) {
       if (item.poster_path == null) {
-        item.poster_path = 'assets/imgs/movieposter.jpg';
+        if (item.first_air_date){
+          item.poster_path = 'assets/imgs/tvposter.jpg'
+        } else if(item.release_date){
+          item.poster_path = 'assets/imgs/movieposter.jpg';
+        } else {
+          item.poster_path = 'assets/imgs/peopleposter.jpg';
+        }
       } else {
         item.poster_path = 'http://image.tmdb.org/t/p/w154/'+item.poster_path;
       }

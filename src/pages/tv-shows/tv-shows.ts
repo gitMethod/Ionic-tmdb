@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {AppList} from '../../models/app-list';
-import {AppTab} from '../../models/app-tab';
 import {ActiveData} from '../../providers/shared-data/active-data';
-import {MoviesProvider} from '../../providers/rest-tmdb/movies.provider';
+import {ListsRest} from '../../providers/rest-tmdb/lists-rest';
+import {TvDataProvider} from '../../providers/shared-data/tv-data';
 
 @IonicPage()
 @Component({
@@ -12,32 +11,35 @@ import {MoviesProvider} from '../../providers/rest-tmdb/movies.provider';
 })
 export class TvShowsPage {
 
+  tvTab;
+  listShowed;
   tvs = [];
-  tvListShowed: AppList;
-  tvsTab: AppTab;
   infiniteScrollStatus = true;
 
-  constructor(private moviesProvider: MoviesProvider, private listProvider: ActiveData) {
+  constructor(private listRest: ListsRest, private tvData: TvDataProvider, private activeData: ActiveData) {
 
-
-
+    tvData.tvObservable.subscribe((value) =>{
+      this.tvTab = value;
+      this.listShowed = this.tvTab.listArray[0];
+      this.tvs = [];
+      this.loadList();
+    });
   }
 
   counter: number = 0;
 
   loadList(infiniteScroll?) {
-    this.moviesProvider.getList(this.tvListShowed, this.tvsTab.name).subscribe(
+    this.listRest.getList(this.listShowed, this.tvTab.name).subscribe(
       data => {
-        this.tvListShowed.responsePage += 3;
+        this.listShowed.responsePage += 3;
         this.counter += data.length;
         this.tvs = this.tvs.concat(data);
 
         if(this.counter < 9)
         {
           this.loadList(infiniteScroll);
-        } else if(this.tvListShowed.responsePage >= 1000) {
+        } else if(this.listShowed.responsePage >= 1000) {
           this.infiniteScrollStatus = false;
-          console.log(this.infiniteScrollStatus);
         } else {
           this.counter = 0;
           if (infiniteScroll) {
@@ -52,7 +54,11 @@ export class TvShowsPage {
         }
       },
     )
+  }
 
+  ionViewWillEnter(){
+    this.activeData.activeTab = this.tvTab;
+    this.activeData.activeList = this.listShowed;
   }
 
 }

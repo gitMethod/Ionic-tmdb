@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import {Events, IonicPage} from 'ionic-angular';
-import {MoviesProvider} from '../../providers/rest-tmdb/movies.provider';
+import {ListsRest} from '../../providers/rest-tmdb/lists-rest';
 import {ActiveData} from '../../providers/shared-data/active-data';
 import {MoviesData} from '../../providers/shared-data/movies-data';
 
@@ -16,7 +16,7 @@ export class MoviesPage {
   movies = [];
   infiniteScrollStatus = true;
 
-  constructor(private moviesProvider: MoviesProvider, private moviesObs: MoviesData, private listProvider: ActiveData) {
+  constructor(private moviesProvider: ListsRest, private moviesObs: MoviesData, private activeData: ActiveData) {
 
     moviesObs.moviesObservable.subscribe((value) =>{
       this.moviesTab = value;
@@ -58,8 +58,8 @@ export class MoviesPage {
   }
 
   ionViewWillEnter(){
-    this.listProvider.activeTab = this.moviesTab;
-    this.listProvider.activeList = this.listShowed;
+    this.activeData.activeTab = this.moviesTab;
+    this.activeData.activeList = this.listShowed;
   }
 
 }

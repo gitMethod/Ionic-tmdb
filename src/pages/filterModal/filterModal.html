@@ -19,7 +19,7 @@
       <ion-radio
          value="{{list.name}}"
          (ionSelect)="checkedRadio(i)"
-         checked="{{i == showedTab.listShowedIdx}}"
+         checked="{{i === findListIndex(showedList)}}"
       ></ion-radio>
     </ion-item>
   </ion-list>

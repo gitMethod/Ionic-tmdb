@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {SearchBarProvider} from '../../providers/shared-data/search-bar.provider';
-import {MultiSearchProvider} from '../../providers/rest-tmdb/search.provider';
+import {MultiSearchProvider} from '../../providers/rest-tmdb/search-rest';
 import {Subscription} from 'rxjs/Subscription';
 
 @IonicPage()

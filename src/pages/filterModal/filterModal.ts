@@ -4,6 +4,7 @@ import {ActiveData} from '../../providers/shared-data/active-data';
 import {AppTab} from '../../models/app-tab';
 import {AppList} from '../../models/app-list';
 import {MoviesData} from '../../providers/shared-data/movies-data';
+import {TvDataProvider} from '../../providers/shared-data/tv-data';
 
 
 @IonicPage()
@@ -24,10 +25,12 @@ export class FilterModalPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private dataTab: ActiveData,
-              private moviesData: MoviesData) {
+              private moviesData: MoviesData,
+              private tvData: TvDataProvider) {
     this.showedTab = dataTab.activeTab;
     this.showedList = dataTab.activeList;
     this.menuIndex = this.findListIndex(dataTab.activeList);
+    console.log(dataTab.activeList);
     this.knobValues.upper = dataTab.activeList.maxRange;
     this.knobValues.lower = dataTab.activeList.minRange;
 
@@ -54,6 +57,7 @@ export class FilterModalPage {
       this.showedList.maxRange = this.knobValues.upper;
       this.showedList.minRange = this.knobValues.lower;
       this.showedTab.listArray[this.findListIndex(this.showedList)] = this.showedList;
+      this.dataTab.activeList = this.showedList;
       this.saveToObservable();
     }
     this.navCtrl.pop();
@@ -65,7 +69,7 @@ export class FilterModalPage {
         this.moviesData.moviesObservable.next(this.showedTab);
         break; }
       case 'TV': {
-        //statements;
+        this.tvData.tvObservable.next(this.showedTab);
         break; }
       case 'PEOPLE': {
         //statements;
@@ -74,7 +78,7 @@ export class FilterModalPage {
   }
 
   findListIndex(appList: AppList){
-    return this.showedTab.listArray.findIndex( item => item === this.showedList);
+    return this.showedTab.listArray.findIndex( item => item === appList);
   }
 
 
