@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {AppSettings} from '../../models/app-settings';
-import {AppList} from '../../models/app-list';
 import {AppTab} from '../../models/app-tab';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {AppList} from '../../models/app-list';
 
 @Injectable()
-export class MoviesData {
+export class TvDataProvider {
 
   moviesTab: AppTab;
   moviesObservable: BehaviorSubject<AppTab>;
@@ -30,6 +30,5 @@ export class MoviesData {
 
     this.moviesObservable = new BehaviorSubject<AppTab>(this.moviesTab);
   }
-
 
 }

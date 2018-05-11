@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {AppList} from '../../models/app-list';
 import {AppTab} from '../../models/app-tab';
-import {ActiveTab} from '../../providers/shared-data/active-tab';
+import {ActiveData} from '../../providers/shared-data/active-data';
 import {MoviesProvider} from '../../providers/rest-tmdb/movies.provider';
 
 @IonicPage()
@@ -17,7 +17,7 @@ export class TvShowsPage {
   tvsTab: AppTab;
   infiniteScrollStatus = true;
 
-  constructor(private moviesProvider: MoviesProvider, private listProvider: ActiveTab) {
+  constructor(private moviesProvider: MoviesProvider, private listProvider: ActiveData) {
 
 
 

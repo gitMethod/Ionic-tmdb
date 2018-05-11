@@ -16,8 +16,9 @@ import { SearchBarProvider } from '../providers/shared-data/search-bar.provider'
 import { MultiSearchProvider } from '../providers/rest-tmdb/search.provider';
 import {DatePicker} from '@ionic-native/date-picker';
 import {FilterModalPage} from '../pages/filterModal/filterModal';
-import { ActiveTab } from '../providers/shared-data/active-tab';
+import { ActiveData } from '../providers/shared-data/active-data';
 import { MoviesData } from '../providers/shared-data/movies-data';
+import { TvDataProvider } from '../providers/shared-data/tv-data';
 
 @NgModule({
   declarations: [
@@ -53,8 +54,9 @@ import { MoviesData } from '../providers/shared-data/movies-data';
     SearchBarProvider,
     MultiSearchProvider,
     DatePicker,
-    ActiveTab,
-    MoviesData
+    ActiveData,
+    MoviesData,
+    TvDataProvider
   ]
 })
 export class AppModule {}

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {ActiveTab} from '../../providers/shared-data/active-tab';
+import {ActiveData} from '../../providers/shared-data/active-data';
 import {AppTab} from '../../models/app-tab';
 import {AppList} from '../../models/app-list';
 import {MoviesData} from '../../providers/shared-data/movies-data';
@@ -23,13 +23,14 @@ export class FilterModalPage {
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private activeTab: ActiveTab,
+              private dataTab: ActiveData,
               private moviesData: MoviesData) {
-    this.showedTab = activeTab.activeTab;
-    this.menuIndex = activeTab.activeTab.listShowedIdx;
-    this.showedList = this.showedTab.listArray[this.menuIndex];
-    this.knobValues.upper = this.showedList.maxRange;
-    this.knobValues.lower = this.showedList.minRange;
+    this.showedTab = dataTab.activeTab;
+    this.showedList = dataTab.activeList;
+    this.menuIndex = this.findListIndex(dataTab.activeList);
+    this.knobValues.upper = dataTab.activeList.maxRange;
+    this.knobValues.lower = dataTab.activeList.minRange;
+
   }
 
   checkedRadio(idx){
@@ -38,7 +39,6 @@ export class FilterModalPage {
       upper: this.showedList.maxRange,
       lower: this.showedList.minRange
     };
-    this.menuIndex = idx;
   }
 
   cancel() {
@@ -46,24 +46,37 @@ export class FilterModalPage {
   }
 
   save() {
-    if(this.menuIndex != this.showedTab.listShowedIdx ||
+    if(this.menuIndex != this.findListIndex(this.showedList) ||
        this.showedList.maxRange != this.knobValues.upper ||
        this.showedList.minRange != this.knobValues.lower
     ){
-      this.showedTab.listShowedIdx = this.menuIndex;
       this.showedList.responsePage = 1;
       this.showedList.maxRange = this.knobValues.upper;
       this.showedList.minRange = this.knobValues.lower;
-      this.showedTab.listArray[this.menuIndex] = this.showedList;
+      this.showedTab.listArray[this.findListIndex(this.showedList)] = this.showedList;
       this.saveToObservable();
     }
     this.navCtrl.pop();
   }
 
   saveToObservable(){
-    if (this.showedList.name === 'Popular'){
-      this.moviesData.moviesObservable.next(this.showedTab)
+    switch(this.showedTab.name) {
+      case 'MOVIES': {
+        this.moviesData.moviesObservable.next(this.showedTab);
+        break; }
+      case 'TV': {
+        //statements;
+        break; }
+      case 'PEOPLE': {
+        //statements;
+        break; }
     }
   }
+
+  findListIndex(appList: AppList){
+    return this.showedTab.listArray.findIndex( item => item === this.showedList);
+  }
+
+
 
 }
