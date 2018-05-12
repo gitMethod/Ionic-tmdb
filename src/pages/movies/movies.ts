@@ -26,23 +26,15 @@ export class MoviesPage {
     });
   }
 
-  counter: number = 0;
-
   loadList(infiniteScroll?) {
+    console.log(this.infiniteScrollStatus);
     this.moviesProvider.getList(this.listShowed, this.moviesTab.name).subscribe(
       data => {
-        this.listShowed.responsePage += 3;
-        this.counter += data.length;
-        this.movies = this.movies.concat(data);
-
-        if(this.counter < 9)
-        {
-          this.loadList(infiniteScroll);
-        } else if(this.listShowed.responsePage >= 1000) {
+        if(data.length <= 0 || this.listShowed.responsePage >= 1000){
           this.infiniteScrollStatus = false;
-          console.log(this.infiniteScrollStatus);
         } else {
-          this.counter = 0;
+          this.movies = this.movies.concat(data);
+          this.listShowed.responsePage += 3;
           if (infiniteScroll) {
             infiniteScroll.complete();
           }

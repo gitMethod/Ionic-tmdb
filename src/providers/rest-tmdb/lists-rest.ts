@@ -14,17 +14,17 @@ export class ListsRest {
 
   getList(appList: AppList, tabName: string): Observable<any> {
     return Observable.forkJoin(
-      this.http.get(appList.apiUrl + appList.responsePage),
-      this.http.get(appList.apiUrl + (appList.responsePage + 1)),
-      this.http.get(appList.apiUrl + (appList.responsePage + 2))
+      this.http.get(appList.apiUrl + '&primary_release_date.gte='+appList.minRange+'&primary_release_date.lte='+appList.maxRange+'&page=' +appList.responsePage),
+      this.http.get(appList.apiUrl + '&primary_release_date.gte='+appList.minRange+'&primary_release_date.lte='+appList.maxRange+'&page=' +(appList.responsePage + 1)),
+      this.http.get(appList.apiUrl + '&primary_release_date.gte='+appList.minRange+'&primary_release_date.lte='+appList.maxRange+'&page=' +(appList.responsePage + 2))
 
     ).map(result=>{
       let tmpArray = this.concatArray(result);
       tmpArray = this.removeNullItems(tmpArray);
       tmpArray = this.updatePathImg(tmpArray);
-      tmpArray = this.filterByTime(tmpArray, appList, tabName);
+      //tmpArray = this.filterByTime(tmpArray, appList, tabName);
       return tmpArray;
-    }).delay(100);
+    });
   }
 
   concatArray(result: any){

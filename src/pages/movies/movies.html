@@ -16,9 +16,8 @@
   </ion-grid>
 
   <ion-infinite-scroll
-    (ionInfinite)="loadList($event)"
     [enabled]="infiniteScrollStatus"
-    threshold="90%"
+    (ionInfinite)="loadList($event)"
   >
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
