@@ -1,13 +1,18 @@
 <ion-content padding="16px">
 
-  <ion-item no-lines="" style="font-size: 14px; margin-top: 16px">
+  <ion-item no-lines="" style="font-size: 14px; margin-top: 16px" >
     <div item-left>{{knobValues.lower}}</div>
-    <div style="text-align: center; font-weight: bold">TIME</div>
+    <div style="text-align: center; font-weight: bold">Release year</div>
     <div item-right>{{knobValues.upper}}</div>
   </ion-item>
 
-  <ion-item>
-    <ion-range dualKnobs="true" [(ngModel)]="knobValues" min="1900" max="2018" [step]="5" [pin]="true" [snaps]="true"></ion-range>
+  <ion-item >
+    <ion-range
+      dualKnobs="true"
+      [(ngModel)]="knobValues"
+      min="1900" max="2019"
+      [step]="5" [snaps]="true"
+      [disabled]="rangeStatus()" ></ion-range>
   </ion-item>
 
   <ion-list radio-group="" no-lines="">

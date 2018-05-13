@@ -1,3 +1,30 @@
 page-people {
 
 }
+
+.people-centered {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.hero-image {
+  max-width: 100%;
+  width: 800px;
+  margin: auto;
+}
+
+.hero-image::after {
+  display: block;
+  position: relative;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #101010 100%);
+  margin-top: -100px;
+  height: 100px;
+  width: 100%;
+  content: '';
+}

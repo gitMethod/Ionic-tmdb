@@ -30,8 +30,7 @@ export class FilterModalPage {
     this.showedTab = dataTab.activeTab;
     this.showedList = dataTab.activeList;
     this.menuIndex = this.findListIndex(dataTab.activeList);
-    console.log(dataTab.activeList);
-    this.knobValues.upper = dataTab.activeList.maxRange;
+    this.knobValues.upper = (dataTab.activeList.maxRange).toString().substr(0, 4);
     this.knobValues.lower = dataTab.activeList.minRange;
 
   }
@@ -39,7 +38,7 @@ export class FilterModalPage {
   checkedRadio(idx){
     this.showedList = this.showedTab.listArray[idx];
     this.knobValues = {
-      upper: this.showedList.maxRange,
+      upper: this.showedList.maxRange.toString().substr(0, 4),
       lower: this.showedList.minRange
     };
   }
@@ -54,7 +53,7 @@ export class FilterModalPage {
        this.showedList.minRange != this.knobValues.lower
     ){
       this.showedList.responsePage = 1;
-      this.showedList.maxRange = this.knobValues.upper;
+      this.showedList.maxRange = this.knobValues.upper +'-12-31';
       this.showedList.minRange = this.knobValues.lower;
       this.showedTab.listArray[this.findListIndex(this.showedList)] = this.showedList;
       this.dataTab.activeList = this.showedList;
@@ -79,6 +78,10 @@ export class FilterModalPage {
 
   findListIndex(appList: AppList){
     return this.showedTab.listArray.findIndex( item => item === appList);
+  }
+
+  rangeStatus(){
+    return !(this.showedList.name === 'Popular' || this.showedList.name === 'Top rated');
   }
 
 

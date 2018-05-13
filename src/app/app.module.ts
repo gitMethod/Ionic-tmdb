@@ -19,6 +19,7 @@ import {FilterModalPage} from '../pages/filterModal/filterModal';
 import { ActiveData } from '../providers/shared-data/active-data';
 import { MoviesData } from '../providers/shared-data/movies-data';
 import { TvDataProvider } from '../providers/shared-data/tv-data';
+import { PeopleDataProvider } from '../providers/shared-data/people-data';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { TvDataProvider } from '../providers/shared-data/tv-data';
     DatePicker,
     ActiveData,
     MoviesData,
-    TvDataProvider
+    TvDataProvider,
+    PeopleDataProvider
   ]
 })
 export class AppModule {}

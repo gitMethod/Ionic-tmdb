@@ -16,8 +16,7 @@ export class TvShowsPage {
   tvs = [];
   infiniteScrollStatus = true;
 
-  constructor(private listRest: ListsRest, private tvData: TvDataProvider, private activeData: ActiveData) {
-
+  constructor(private listsRest: ListsRest, private tvData: TvDataProvider, private activeData: ActiveData) {
     tvData.tvObservable.subscribe((value) =>{
       this.tvTab = value;
       this.listShowed = this.tvTab.listArray[0];
@@ -29,7 +28,7 @@ export class TvShowsPage {
   counter: number = 0;
 
   loadList(infiniteScroll?) {
-    this.listRest.getList(this.listShowed, this.tvTab.name).subscribe(
+    this.listsRest.getList(this.listShowed, this.tvTab.name).subscribe(
       data => {
         this.listShowed.responsePage += 3;
         this.counter += data.length;

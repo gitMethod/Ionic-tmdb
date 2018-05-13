@@ -16,19 +16,19 @@ export class MoviesPage {
   movies = [];
   infiniteScrollStatus = true;
 
-  constructor(private moviesProvider: ListsRest, private moviesObs: MoviesData, private activeData: ActiveData) {
-
+  constructor(private listsRest: ListsRest, private moviesObs: MoviesData, private activeData: ActiveData) {
     moviesObs.moviesObservable.subscribe((value) =>{
       this.moviesTab = value;
-      this.listShowed = this.moviesTab.listArray[0];
+      this.listShowed = this.activeData.activeList;
       this.movies = [];
       this.loadList();
     });
   }
 
   loadList(infiniteScroll?) {
+    this.infiniteScrollStatus = true;
     console.log(this.infiniteScrollStatus);
-    this.moviesProvider.getList(this.listShowed, this.moviesTab.name).subscribe(
+    this.listsRest.getList(this.listShowed, this.moviesTab.name).subscribe(
       data => {
         if(data.length <= 0 || this.listShowed.responsePage >= 1000){
           this.infiniteScrollStatus = false;
