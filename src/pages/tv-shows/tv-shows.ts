@@ -25,22 +25,16 @@ export class TvShowsPage {
     });
   }
 
-  counter: number = 0;
-
   loadList(infiniteScroll?) {
+    this.infiniteScrollStatus = true;
+    console.log(this.infiniteScrollStatus);
     this.listsRest.getList(this.listShowed, this.tvTab.name).subscribe(
       data => {
-        this.listShowed.responsePage += 3;
-        this.counter += data.length;
-        this.tvs = this.tvs.concat(data);
-
-        if(this.counter < 9)
-        {
-          this.loadList(infiniteScroll);
-        } else if(this.listShowed.responsePage >= 1000) {
+        if(data.length <= 0 || this.listShowed.responsePage >= 1000){
           this.infiniteScrollStatus = false;
         } else {
-          this.counter = 0;
+          this.tvs = this.tvs.concat(data);
+          this.listShowed.responsePage += 3;
           if (infiniteScroll) {
             infiniteScroll.complete();
           }

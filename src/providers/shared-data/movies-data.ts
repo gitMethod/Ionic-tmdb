@@ -21,7 +21,7 @@ export class MoviesData {
     this.moviesPopular = new AppList('Popular', AppSettings.MOVIES_POPULAR_ENDPOINT);
     this.moviesTopRated = new AppList('Top rated', AppSettings.MOVIES_TOP_RATED_ENDPOINT);
     this.moviesUpcoming = new AppList('Up coming', AppSettings.MOVIES_UPCOMING_ENDPOINT);
-    this.moviesNowPlaying = new AppList('Now Playing', AppSettings.MOVIES_NOW_PLAYING_ENDPOINT);
+    this.moviesNowPlaying = new AppList('Now playing', AppSettings.MOVIES_NOW_PLAYING_ENDPOINT);
 
     this.moviesTab = {
       name: 'MOVIES',

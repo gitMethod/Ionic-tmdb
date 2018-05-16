@@ -48,17 +48,20 @@ export class ListsRest {
 
   updatePathImg(array: any[]) {
     for (let item of array) {
-      if (item.poster_path == null && item.profile_path == null) {
+      if (item.poster_path === null || item.profile_path === null) {
         if (item.first_air_date){
           item.poster_path = 'assets/imgs/tvposter.jpg'
         } else if(item.release_date){
           item.poster_path = 'assets/imgs/movieposter.jpg';
         } else {
-          item.poster_path = 'assets/imgs/peopleposter.jpg';
+          item.profile_path = 'assets/imgs/peopleposter.jpg';
         }
       } else {
-        item.poster_path = 'http://image.tmdb.org/t/p/w154/'+item.poster_path;
-        item.profile_path = 'http://image.tmdb.org/t/p/w154/'+item.profile_path;
+        if(item.poster_path){
+          item.poster_path = 'http://image.tmdb.org/t/p/w154' + item.poster_path;
+        } else {
+          item.profile_path = 'http://image.tmdb.org/t/p/w154' + item.profile_path;
+        }
       }
     }
     return array;

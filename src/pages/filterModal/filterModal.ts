@@ -81,7 +81,12 @@ export class FilterModalPage {
   }
 
   rangeStatus(){
-    return !(this.showedList.name === 'Popular' || this.showedList.name === 'Top rated');
+    return ( this.showedList.name === 'Up coming'
+      || this.showedList.name === 'Now playing'
+      || this.showedList.name === 'Airing today'
+      || this.showedList.name === 'On the air'
+      || this.showedTab.name === 'PEOPLE'
+    );
   }
 
 

@@ -6,16 +6,16 @@
 
 <ion-content>
   <ion-list style="margin-top: 4px">
-    <ion-item *ngFor="let result of resultArr" style="padding-left: 8px">
+    <ion-item *ngFor="let result of resultArr" style="padding-left: 8px" text-wrap="">
       <ion-thumbnail item-start style="margin: 4px 16px 4px 0; min-width: 60px">
-        <img
-          style="max-width: 54px"
-          src="{{result.poster_path}}"
-        >
+        <img *ngIf="result.poster_path" style="max-width: 54px" src="{{result.poster_path}}">
+        <img *ngIf="result.profile_path" style="max-width: 54px" src="{{result.profile_path}}">
       </ion-thumbnail>
-      <h1>{{result.media_type}}</h1>
-      <h2 *ngIf="result.title">  {{result.title}}</h2>
-      <h2 *ngIf="result.name">  {{result.name}}</h2>
+      <span class="title">{{result.media_type}}</span>
+      <span *ngIf="result.release_date" class="year">&nbsp;&nbsp;{{result.release_date.substr(0,4)}}</span>
+      <span *ngIf="result.first_air_date" class="year">&nbsp;&nbsp;{{result.first_air_date.substr(0,4)}}</span>
+      <p *ngIf="result.title">  {{result.title}}</p>
+      <p *ngIf="result.name">  {{result.name}}</p>
     </ion-item>
   </ion-list>
 </ion-content>
