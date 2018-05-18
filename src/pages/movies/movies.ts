@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import {Events, IonicPage} from 'ionic-angular';
+import { IonicPage} from 'ionic-angular';
 import {ListsRest} from '../../providers/rest-tmdb/lists-rest';
 import {ActiveData} from '../../providers/shared-data/active-data';
 import {MoviesData} from '../../providers/shared-data/movies-data';

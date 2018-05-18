@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import {ActiveData} from '../../providers/shared-data/active-data';
 import {ListsRest} from '../../providers/rest-tmdb/lists-rest';
 import {TvDataProvider} from '../../providers/shared-data/tv-data';

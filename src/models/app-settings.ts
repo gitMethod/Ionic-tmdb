@@ -19,5 +19,4 @@ export class AppSettings {
 
   public static PEOPLE_POPULAR= AppSettings.API_BASE+'person/popular'+AppSettings.API_KEY +AppSettings.LANGUAGE;
 
-
 }

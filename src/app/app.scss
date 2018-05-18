@@ -30,14 +30,20 @@
     .modal-wrapper {
       border-radius: 10px;
       overflow: hidden;
-      top: 15%;
+      top: 10%;
       left: 10%;
       position: absolute;
       width: 80%;
-      height: 70%;
+      height: 80%;
     }
   }
 }
+
+.tabbar{
+  top:56px !important;
+}
+
+
 
 
 
