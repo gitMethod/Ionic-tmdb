@@ -24,7 +24,6 @@ export class MultiSearchProvider {
     tempArray = tempArray.concat(result[1].results);
     tempArray = tempArray.concat(result[2].results);
     this.updatePathImg(tempArray);
-    console.log(tempArray);
     return tempArray;
   }
 

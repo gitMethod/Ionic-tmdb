@@ -8,27 +8,23 @@ import {AppList} from '../../models/app-list';
 @Injectable()
 export class TvDataProvider {
 
-  tvTab: AppTab;
-  tvObservable: BehaviorSubject<AppTab>;
-
-  tvPopular: AppList;
-  tvTopRated: AppList;
-  tvAiringToday: AppList;
-  tvOnTheAir: AppList;
+  tabsObs: BehaviorSubject<AppTab>;
+  listObs: BehaviorSubject<AppList>;
 
   constructor(public http: HttpClient) {
 
-    this.tvPopular = new AppList('Popular', AppSettings.TV_POPULAR);
-    this.tvTopRated = new AppList('Top rated', AppSettings.TV_TOP_RATED);
-    this.tvAiringToday = new AppList('Airing today', AppSettings.TV_AIRING_TODAY);
-    this.tvOnTheAir = new AppList('On the air', AppSettings.TV_ON_THE_AIR);
+    const tvPopular = new AppList('Popular', AppSettings.TV_POPULAR);
+    const tvTopRated = new AppList('Top rated', AppSettings.TV_TOP_RATED);
+    const tvAiringToday = new AppList('Airing today', AppSettings.TV_AIRING_TODAY);
+    const tvOnTheAir = new AppList('On the air', AppSettings.TV_ON_THE_AIR);
 
-    this.tvTab = {
+    const tvTab = {
       name: 'TV',
-      listArray: [this.tvPopular, this.tvTopRated, this.tvAiringToday, this.tvOnTheAir],
+      listArray: [tvPopular, tvTopRated, tvAiringToday, tvOnTheAir],
     };
 
-    this.tvObservable = new BehaviorSubject<AppTab>(this.tvTab);
+    this.tabsObs = new BehaviorSubject<AppTab>(tvTab);
+    this.listObs = new BehaviorSubject<AppList>(tvTab.listArray[0]);
   }
 
 }

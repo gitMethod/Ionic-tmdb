@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {ActiveData} from '../../providers/shared-data/active-data';
+import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {AppTab} from '../../models/app-tab';
 import {AppList} from '../../models/app-list';
 import {MoviesData} from '../../providers/shared-data/movies-data';
 import {TvDataProvider} from '../../providers/shared-data/tv-data';
+import {PeopleDataProvider} from '../../providers/shared-data/people-data';
 
 
 @IonicPage()
@@ -23,16 +23,14 @@ export class FilterModalPage {
     lower: 0
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              private dataTab: ActiveData,
-              private moviesData: MoviesData,
-              private tvData: TvDataProvider) {
-    this.showedTab = dataTab.activeTab;
-    this.showedList = dataTab.activeList;
-    this.menuIndex = this.findListIndex(dataTab.activeList);
-    this.knobValues.upper = (dataTab.activeList.maxRange).toString().substr(0, 4);
-    this.knobValues.lower = dataTab.activeList.minRange;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events,
+    private peopleData: PeopleDataProvider, private moviesData: MoviesData, private tvData: TvDataProvider) {
 
+    this.showedTab = this.findActiveData().tabsObs.getValue();
+    this.showedList = this.findActiveData().listObs.getValue();
+    this.menuIndex = this.findListIndex(this.showedList);
+    this.knobValues.upper = (this.showedList.maxRange).toString().substr(0, 4);
+    this.knobValues.lower = this.showedList.minRange;
   }
 
   checkedRadio(idx){
@@ -56,24 +54,10 @@ export class FilterModalPage {
       this.showedList.maxRange = this.knobValues.upper +'-12-31';
       this.showedList.minRange = this.knobValues.lower;
       this.showedTab.listArray[this.findListIndex(this.showedList)] = this.showedList;
-      this.dataTab.activeList = this.showedList;
-      this.saveToObservable();
+      this.findActiveData().tabsObs.next(this.showedTab);
+      this.findActiveData().listObs.next(this.showedList);
     }
     this.navCtrl.pop();
-  }
-
-  saveToObservable(){
-    switch(this.showedTab.name) {
-      case 'MOVIES': {
-        this.moviesData.moviesObservable.next(this.showedTab);
-        break; }
-      case 'TV': {
-        this.tvData.tvObservable.next(this.showedTab);
-        break; }
-      case 'PEOPLE': {
-        //statements;
-        break; }
-    }
   }
 
   findListIndex(appList: AppList){
@@ -87,6 +71,19 @@ export class FilterModalPage {
       || this.showedList.name === 'On the air'
       || this.showedTab.name === 'PEOPLE'
     );
+  }
+
+  findActiveData(){
+    switch (this.navParams.get('activeTab')){
+      case 'MOVIES':
+        return this.moviesData;
+      case 'TV-SHOWS':
+        return this.tvData;
+      case 'PEOPLE':
+        return this.peopleData;
+      default:
+
+    }
   }
 
 

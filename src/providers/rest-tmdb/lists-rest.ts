@@ -5,21 +5,20 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/observable/forkJoin';
 import {AppList} from '../../models/app-list';
 import 'rxjs/add/operator/delay';
-import {ActiveData} from '../shared-data/active-data';
 
 
 @Injectable()
 export class ListsRest {
 
-  constructor(public http: HttpClient, private activeData: ActiveData) {}
+  constructor(public http: HttpClient) {}
 
   getList(appList: AppList, tabName: string): Observable<any> {
     let dateSince = '';
     let dateUntil = '';
-    if(this.activeData.activeTab.name === 'MOVIES'){
+    if(tabName === 'MOVIES'){
       dateSince = '&primary_release_date.gte=';
       dateUntil = '&primary_release_date.lte='
-    } else if (this.activeData.activeTab.name === 'TV') {
+    } else if (tabName === 'TV') {
       dateSince = '&first_air_date.gte=';
       dateUntil = '&first_air_date.lte='
     }
@@ -32,8 +31,6 @@ export class ListsRest {
       let tmpArray = this.concatArray(result);
       tmpArray = this.removeNullItems(tmpArray);
       tmpArray = this.updatePathImg(tmpArray);
-      //tmpArray = this.filterByTime(tmpArray, appList, tabName);
-      console.log(tmpArray);
       return tmpArray;
     });
   }
@@ -67,7 +64,6 @@ export class ListsRest {
     return array;
   }
 
-
   removeNullItems(array: any[]) {
     for (let i = array.length - 1; i >= 0; --i) {
       if (!array[i]) {
@@ -77,13 +73,5 @@ export class ListsRest {
     return array;
   }
 
-  filterByTime(array: any[], appList: AppList, tabName: string){
-    if( tabName === 'MOVIES'){
-      return  array.filter(obj =>
-        obj.release_date > appList.minRange.toString() && obj.release_date < appList.maxRange.toString()+'1231');
-    } else if ( tabName === 'TV')
-      return  array.filter(obj =>
-        obj.first_air_date > appList.minRange.toString() && obj.first_air_date < appList.maxRange.toString()+'1231');
-  }
 
 }

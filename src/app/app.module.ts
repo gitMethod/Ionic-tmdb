@@ -8,7 +8,7 @@ import { MyApp } from './app.component';
 import {MoviesPage} from '../pages/movies/movies';
 import {TvShowsPage} from '../pages/tv-shows/tv-shows';
 import {PeoplePage} from '../pages/people/people';
-import {TabsPage} from '../pages/tabs/tabs';
+import {TabsPage} from '../pages/main-tabs/main-tabs';
 import {HttpClientModule} from '@angular/common/http';
 import { ListsRest } from '../providers/rest-tmdb/lists-rest';
 import {SearchPage} from '../pages/search/search';
@@ -16,10 +16,10 @@ import { SearchBarProvider } from '../providers/shared-data/search-bar.provider'
 import { MultiSearchProvider } from '../providers/rest-tmdb/search-rest';
 import {DatePicker} from '@ionic-native/date-picker';
 import {FilterModalPage} from '../pages/filterModal/filterModal';
-import { ActiveData } from '../providers/shared-data/active-data';
 import { MoviesData } from '../providers/shared-data/movies-data';
 import { TvDataProvider } from '../providers/shared-data/tv-data';
 import { PeopleDataProvider } from '../providers/shared-data/people-data';
+import {ItemDetailsPage} from '../pages/item-details/item-details';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import { PeopleDataProvider } from '../providers/shared-data/people-data';
     PeoplePage,
     TabsPage,
     SearchPage,
-    FilterModalPage
+    FilterModalPage,
+    ItemDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import { PeopleDataProvider } from '../providers/shared-data/people-data';
     PeoplePage,
     TabsPage,
     SearchPage,
-    FilterModalPage
+    FilterModalPage,
+    ItemDetailsPage
 
   ],
   providers: [
@@ -55,7 +57,6 @@ import { PeopleDataProvider } from '../providers/shared-data/people-data';
     SearchBarProvider,
     MultiSearchProvider,
     DatePicker,
-    ActiveData,
     MoviesData,
     TvDataProvider,
     PeopleDataProvider

@@ -1,8 +1,10 @@
 import { Component} from '@angular/core';
-import { IonicPage} from 'ionic-angular';
+import {App, IonicPage, NavController} from 'ionic-angular';
 import {ListsRest} from '../../providers/rest-tmdb/lists-rest';
-import {ActiveData} from '../../providers/shared-data/active-data';
 import {MoviesData} from '../../providers/shared-data/movies-data';
+import {ItemDetailsPage} from '../item-details/item-details';
+import {AppTab} from '../../models/app-tab';
+import {AppList} from '../../models/app-list';
 
 @IonicPage()
 @Component({
@@ -11,15 +13,18 @@ import {MoviesData} from '../../providers/shared-data/movies-data';
 })
 export class MoviesPage {
 
-  moviesTab;
-  listShowed;
+  tabShowed: AppTab;
+  listShowed: AppList;
   movies = [];
   infiniteScrollStatus = true;
 
-  constructor(private listsRest: ListsRest, private moviesObs: MoviesData, private activeData: ActiveData) {
-    moviesObs.moviesObservable.subscribe((value) =>{
-      this.moviesTab = value;
-      this.listShowed = this.activeData.activeList;
+  constructor(private listsRest: ListsRest, private moviesData: MoviesData,
+              public navCtrl: NavController, private  app: App) {
+    moviesData.tabsObs.subscribe((value) =>{
+      this.tabShowed = value;
+    });
+    moviesData.listObs.subscribe((value) => {
+      this.listShowed = value;
       this.movies = [];
       this.loadList();
     });
@@ -27,8 +32,7 @@ export class MoviesPage {
 
   loadList(infiniteScroll?) {
     this.infiniteScrollStatus = true;
-    console.log(this.infiniteScrollStatus);
-    this.listsRest.getList(this.listShowed, this.moviesTab.name).subscribe(
+    this.listsRest.getList(this.listShowed, this.tabShowed.name).subscribe(
       data => {
         if(data.length <= 0 || this.listShowed.responsePage >= 1000){
           this.infiniteScrollStatus = false;
@@ -49,9 +53,8 @@ export class MoviesPage {
     )
   }
 
-  ionViewWillEnter(){
-    this.activeData.activeTab = this.moviesTab;
-    this.activeData.activeList = this.listShowed;
+  pushDetailsPage(){
+    this.app.getRootNav().push(ItemDetailsPage);
   }
 
 }

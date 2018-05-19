@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
-import {ActiveData} from '../../providers/shared-data/active-data';
+import {App, IonicPage, NavController} from 'ionic-angular';
 import {ListsRest} from '../../providers/rest-tmdb/lists-rest';
 import {TvDataProvider} from '../../providers/shared-data/tv-data';
+import {AppList} from '../../models/app-list';
+import {ItemDetailsPage} from '../item-details/item-details';
+import {AppTab} from '../../models/app-tab';
 
 @IonicPage()
 @Component({
@@ -11,15 +13,18 @@ import {TvDataProvider} from '../../providers/shared-data/tv-data';
 })
 export class TvShowsPage {
 
-  tvTab;
-  listShowed;
+  tabShowed: AppTab;
+  listShowed: AppList;
   tvs = [];
   infiniteScrollStatus = true;
 
-  constructor(private listsRest: ListsRest, private tvData: TvDataProvider, private activeData: ActiveData) {
-    tvData.tvObservable.subscribe((value) =>{
-      this.tvTab = value;
-      this.listShowed = this.tvTab.listArray[0];
+  constructor(private listsRest: ListsRest, private tvData: TvDataProvider,
+              public navCtrl: NavController, private  app: App) {
+    tvData.tabsObs.subscribe((value) =>{
+      this.tabShowed = value;
+    });
+    tvData.listObs.subscribe((value) => {
+      this.listShowed = value;
       this.tvs = [];
       this.loadList();
     });
@@ -27,8 +32,7 @@ export class TvShowsPage {
 
   loadList(infiniteScroll?) {
     this.infiniteScrollStatus = true;
-    console.log(this.infiniteScrollStatus);
-    this.listsRest.getList(this.listShowed, this.tvTab.name).subscribe(
+    this.listsRest.getList(this.listShowed, this.tabShowed.name).subscribe(
       data => {
         if(data.length <= 0 || this.listShowed.responsePage >= 1000){
           this.infiniteScrollStatus = false;
@@ -49,9 +53,8 @@ export class TvShowsPage {
     )
   }
 
-  ionViewWillEnter(){
-    this.activeData.activeTab = this.tvTab;
-    this.activeData.activeList = this.listShowed;
+  pushDetailsPage(){
+    this.app.getRootNav().push(ItemDetailsPage);
   }
 
 }

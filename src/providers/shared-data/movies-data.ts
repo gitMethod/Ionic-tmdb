@@ -8,27 +8,24 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 @Injectable()
 export class MoviesData {
 
-  moviesTab: AppTab;
-  moviesObservable: BehaviorSubject<AppTab>;
-
-  moviesPopular: AppList;
-  moviesTopRated: AppList;
-  moviesUpcoming: AppList;
-  moviesNowPlaying: AppList;
+  tabsObs: BehaviorSubject<AppTab>;
+  listObs: BehaviorSubject<AppList>;
 
   constructor(public http: HttpClient) {
 
-    this.moviesPopular = new AppList('Popular', AppSettings.MOVIES_POPULAR_ENDPOINT);
-    this.moviesTopRated = new AppList('Top rated', AppSettings.MOVIES_TOP_RATED_ENDPOINT);
-    this.moviesUpcoming = new AppList('Up coming', AppSettings.MOVIES_UPCOMING_ENDPOINT);
-    this.moviesNowPlaying = new AppList('Now playing', AppSettings.MOVIES_NOW_PLAYING_ENDPOINT);
+    const moviesPopular = new AppList('Popular', AppSettings.MOVIES_POPULAR_ENDPOINT);
+    const moviesTopRated = new AppList('Top rated', AppSettings.MOVIES_TOP_RATED_ENDPOINT);
+    const moviesUpcoming = new AppList('Up coming', AppSettings.MOVIES_UPCOMING_ENDPOINT);
+    const moviesNowPlaying = new AppList('Now playing', AppSettings.MOVIES_NOW_PLAYING_ENDPOINT);
 
-    this.moviesTab = {
+    const moviesTab = {
       name: 'MOVIES',
-      listArray: [this.moviesPopular, this.moviesTopRated, this.moviesUpcoming, this.moviesNowPlaying],
+      listArray: [moviesPopular, moviesTopRated, moviesUpcoming, moviesNowPlaying],
     };
 
-    this.moviesObservable = new BehaviorSubject<AppTab>(this.moviesTab);
+    this.tabsObs = new BehaviorSubject<AppTab>(moviesTab);
+    this.listObs = new BehaviorSubject<AppList>(moviesTab.listArray[0]);
+
   }
 
 

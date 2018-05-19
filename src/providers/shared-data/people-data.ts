@@ -9,21 +9,20 @@ import {AppList} from '../../models/app-list';
 @Injectable()
 export class PeopleDataProvider {
 
-  peopleTab: AppTab;
-  peopleObservable: BehaviorSubject<AppTab>;
-
-  peoplePopular: AppList;
+  tabsObs: BehaviorSubject<AppTab>;
+  listObs: BehaviorSubject<AppList>;
 
   constructor(public http: HttpClient) {
 
-    this.peoplePopular = new AppList('Popular', AppSettings.PEOPLE_POPULAR);
+    const peoplePopular = new AppList('Popular', AppSettings.PEOPLE_POPULAR);
 
-    this.peopleTab = {
+    const peopleTab = {
       name: 'PEOPLE',
-      listArray: [this.peoplePopular],
+      listArray: [peoplePopular],
     };
 
-    this.peopleObservable = new BehaviorSubject<AppTab>(this.peopleTab);
+    this.tabsObs = new BehaviorSubject<AppTab>(peopleTab);
+    this.listObs = new BehaviorSubject<AppList>(peopleTab.listArray[0]);
   }
 
 
