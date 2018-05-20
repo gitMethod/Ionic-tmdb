@@ -20,6 +20,7 @@ import { MoviesData } from '../providers/shared-data/movies-data';
 import { TvDataProvider } from '../providers/shared-data/tv-data';
 import { PeopleDataProvider } from '../providers/shared-data/people-data';
 import {ItemDetailsPage} from '../pages/item-details/item-details';
+import {IonicImageLoader} from 'ionic-image-loader';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {ItemDetailsPage} from '../pages/item-details/item-details';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicImageLoader.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

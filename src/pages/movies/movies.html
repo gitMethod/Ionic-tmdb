@@ -9,7 +9,7 @@
   <ion-grid no-padding="">
     <ion-row>
       <ion-col col-4 col-sm-3 col-md-2 *ngFor="let movie of movies" (click)="pushDetailsPage()">
-        <img src="{{movie.poster_path}}" no-margin="" style="min-height: 100%; min-width: 100%; margin-bottom: -4px">
+        <img [src]="movie.poster_path"/>
         <div *ngIf="movie.poster_path.indexOf('assets') !== -1" class="centered">{{movie.title}}</div>
       </ion-col>
     </ion-row>

@@ -19,7 +19,6 @@ export class TabsPage{
   @ViewChild('mainTabs') tabRef: Tabs;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events) {
-    //this.events.publish('activeTab', this.testing);
 
   }
 

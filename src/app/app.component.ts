@@ -7,6 +7,7 @@ import {TabsPage} from '../pages/main-tabs/main-tabs';
 import {SearchPage} from '../pages/search/search';
 import {SearchBarProvider} from '../providers/shared-data/search-bar.provider';
 import {FilterModalPage} from '../pages/filterModal/filterModal';
+import {ImageLoaderConfig} from 'ionic-image-loader';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,13 +19,16 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-    private searchDataProvider: SearchBarProvider, private modalCtrl: ModalController, private events: Events
+    private searchDataProvider: SearchBarProvider, private modalCtrl: ModalController,
+              private events: Events, private imageLoaderConfig: ImageLoaderConfig
   ){
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
     });
     events.subscribe('activeTab',(data) => { this.activeTab = data });
+    this.imageLoaderConfig.setMaximumCacheAge(168 * 60 * 60 * 1000);
+    this.imageLoaderConfig.enableSpinner(true);
   }
 
   openSearchPage(){
