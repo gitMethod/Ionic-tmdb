@@ -61,7 +61,8 @@ import {IonicImageLoader} from 'ionic-image-loader';
     DatePicker,
     MoviesData,
     TvDataProvider,
-    PeopleDataProvider
+    PeopleDataProvider,
+    SplashScreen
   ]
 })
 export class AppModule {}

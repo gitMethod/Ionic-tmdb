@@ -8,6 +8,7 @@ import {SearchPage} from '../pages/search/search';
 import {SearchBarProvider} from '../providers/shared-data/search-bar.provider';
 import {FilterModalPage} from '../pages/filterModal/filterModal';
 import {ImageLoaderConfig} from 'ionic-image-loader';
+import {timer} from 'rxjs/observable/timer';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,6 +18,7 @@ export class MyApp {
   rootPage:any = TabsPage;
   isSearchBarOpened = false;
   @ViewChild(Nav) nav: Nav;
+  showSplash = true;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     private searchDataProvider: SearchBarProvider, private modalCtrl: ModalController,
@@ -25,6 +27,7 @@ export class MyApp {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
+      timer(3000).subscribe(()=> this.showSplash = false);
     });
     events.subscribe('activeTab',(data) => { this.activeTab = data });
     this.imageLoaderConfig.setMaximumCacheAge(168 * 60 * 60 * 1000);
