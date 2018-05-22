@@ -1,13 +1,49 @@
 
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>item-details</ion-title>
+<ion-header style="background-color: #ff7400">
+  <ion-navbar transparent="" >
+    <ion-title>Details</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
- <h1>Whatsss upppp!!</h1>
+<ion-content>
+  <div>
+    <div class="backdrop">
+      <img [src]=" 'http://image.tmdb.org/t/p/w300' + movie.backdrop_path" >
+    </div>
+
+    <ion-grid>
+      <ion-row class="second-row">
+        <ion-col>
+          <img [src]="poster">
+        </ion-col>
+        <ion-col align-self-end="" text-center="">
+          <circle-progress
+            [showSubtitle]="false"
+            [subtitleFontSize]="16"
+            [percent]="movie.vote_average * 10"
+            [radius]="32"
+            [outerStrokeWidth]="4"
+            [innerStrokeWidth]="2.4"
+            [outerStrokeColor]="'#d63b00'"
+            [innerStrokeColor]="'#d6a073'"
+            [titleFontSize]="16"
+            [animation]="true"
+            [animationDuration]="300"
+          ></circle-progress>
+        </ion-col>
+        <ion-col align-self-end="">
+          <div>{{movie.release_date}}</div>
+          <div>{{movie.runtime + ' minutes'}}</div>
+          <div>{{movie.vote_count + ' votes'}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="third-row">
+        <h5>{{movie.title}}</h5>
+        <p>{{movie.overview}}</p>
+      </ion-row>
+    </ion-grid>
+
+
+  </div>
 </ion-content>

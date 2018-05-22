@@ -2,6 +2,7 @@ export class AppSettings {
   public static API_KEY= '?api_key=dbb539c09bc6d9e2e9e6bf360b705e5b';
   public static API_BASE= 'https://api.themoviedb.org/3/';
   public static LANGUAGE= '&language=en-US';
+  public static IMAGE= 'http://image.tmdb.org/t/p/w154';
 
   public static MOVIES_POPULAR_ENDPOINT= AppSettings.API_BASE+'discover/movie'+AppSettings.API_KEY +AppSettings.LANGUAGE
   +'&sort_by=popularity.desc&include_adult=false';

@@ -53,8 +53,8 @@ export class MoviesPage {
     )
   }
 
-  pushDetailsPage(){
-    this.app.getRootNav().push(ItemDetailsPage);
+  pushDetailsPage(i){
+    this.app.getRootNav().push(ItemDetailsPage,{'movie': this.movies[i]});
   }
 
 }

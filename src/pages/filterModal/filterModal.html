@@ -1,25 +1,25 @@
 <ion-content padding="16px">
 
-  <ion-item no-lines="" style="font-size: 14px; margin-top: 16px" >
+  <ion-item no-lines="" style="font-size: 14px; margin-top: 16px; background-color: #ff7400" >
     <div item-left>{{knobValues.lower}}</div>
     <div style="text-align: center; font-weight: bold">Release year</div>
     <div item-right>{{knobValues.upper}}</div>
   </ion-item>
 
-  <ion-item >
+  <ion-item  style="background-color: #ff7400">
     <ion-range
       dualKnobs="true"
       [(ngModel)]="knobValues"
       min="1900" max="2019"
-      [step]="5" [snaps]="true"
+      [step]="5"
       [disabled]="rangeStatus()" ></ion-range>
   </ion-item>
 
   <ion-list radio-group="" no-lines="">
     <ion-item
-      style="padding-top: 12px; margin-bottom: 0; font-weight: bold; font-size: 14px"
+      style="padding-top: 12px; margin-bottom: 0; font-weight: bold; font-size: 14px; background-color: #ff7400"
     >{{showedTab.name}}</ion-item>
-    <ion-item *ngFor="let list of showedTab.listArray; let i=index">
+    <ion-item *ngFor="let list of showedTab.listArray; let i=index" style="background-color: #ff7400">
       <ion-label>{{list.name}}</ion-label>
       <ion-radio
          value="{{list.name}}"
@@ -31,8 +31,8 @@
 
 </ion-content>
 
-<ion-footer>
-  <ion-item no-lines="">
+<ion-footer >
+  <ion-item no-lines="" style="background-color: #ff7400">
     <button item-left="" ion-button small clear (click)="cancel()">Cancel</button>
     <button item-right="" ion-button small clear (click)="save()">Save</button>
   </ion-item>

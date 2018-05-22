@@ -1,3 +1,51 @@
+
 page-item-details {
 
+  .backdrop img{
+    width: 100%;
+  }
+
+  ion-grid {
+    margin-top: -80px;
+  }
+
+  ion-grid img{
+    object-fit: contain
+  }
+
+  ion-grid h5 {
+    color: #d63b00;
+  }
+
+  .content-md {
+    background-color: #f4f4f4;
+  }
+
+  .second-row div {
+    color: #545454;
+    margin: 8px 0;
+    font-size: 12px;
+  }
+
+  .second-row ion-col:nth-child(2n) {
+    margin-bottom: -8px;
+  }
+
+  .third-row{
+    padding: 0 4px;
+    margin-top: 16px;
+  }
+
+  ion-header ion-icon.back-button-icon.icon {
+    color: white;
+  }
+
+  .toolbar-title-md {
+    color: #f4f4f4;
+  }
+
 }
+
+
+
+

@@ -21,6 +21,8 @@ import { TvDataProvider } from '../providers/shared-data/tv-data';
 import { PeopleDataProvider } from '../providers/shared-data/people-data';
 import {ItemDetailsPage} from '../pages/item-details/item-details';
 import {IonicImageLoader} from 'ionic-image-loader';
+import { DetailsTmdbProvider } from '../providers/rest-tmdb/details-tmdb';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,15 @@ import {IonicImageLoader} from 'ionic-image-loader';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicImageLoader.forRoot()
+    IonicImageLoader.forRoot(),
+    NgCircleProgressModule.forRoot({
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -62,7 +72,8 @@ import {IonicImageLoader} from 'ionic-image-loader';
     MoviesData,
     TvDataProvider,
     PeopleDataProvider,
-    SplashScreen
+    SplashScreen,
+    DetailsTmdbProvider
   ]
 })
 export class AppModule {}
