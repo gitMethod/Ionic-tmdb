@@ -50,7 +50,7 @@ export class MyApp {
     this.searchDataProvider.searchString.next(' ');
   }
 
-  presentCalendarModal(){
+  presentFilterModal(){
     let modal = this.modalCtrl.create(
       FilterModalPage,
       {'activeTab': this.activeTab},

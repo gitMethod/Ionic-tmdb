@@ -2,11 +2,26 @@ page-calendar {
 
 }
 
-ion-list > ion-item  {
-  background-color: #ff7400
-}
-
 .range-md.range-disabled .range-knob {
   outline: none;
 }
+
+.year-range {
+  font-size: 12px;
+  text-align: center;
+  color: #ff7400
+}
+
+.tab-title {
+  padding-top: 12px;
+  margin-bottom: 0;
+  //font-weight: bold;
+  font-size: 14px;
+  color: #ff7400
+}
+
+ion-footer .button-clear-md {
+  color: white;
+}
+
 

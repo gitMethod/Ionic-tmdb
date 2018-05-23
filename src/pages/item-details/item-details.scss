@@ -32,8 +32,12 @@ page-item-details {
   }
 
   .third-row{
-    padding: 0 4px;
+    padding: 4px;
     margin-top: 16px;
+  }
+
+  .third-row h5{
+    margin: 0;
   }
 
   ion-header ion-icon.back-button-icon.icon {

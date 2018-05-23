@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list style="margin-top: 4px">
-    <ion-item *ngFor="let result of resultArr" style="padding-left: 8px; background-color: #ff7400" text-wrap="" >
+    <ion-item *ngFor="let result of resultArr" style="padding-left: 8px" text-wrap="" >
       <ion-thumbnail item-start style="margin: 4px 16px 4px 0; min-width: 60px">
         <img *ngIf="result.poster_path" style="max-width: 54px" src="{{result.poster_path}}">
         <img *ngIf="result.profile_path" style="max-width: 54px" src="{{result.profile_path}}">

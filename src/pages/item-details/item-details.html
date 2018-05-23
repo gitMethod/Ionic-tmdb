@@ -23,8 +23,8 @@
             [subtitleFontSize]="16"
             [percent]="movie.vote_average * 10"
             [radius]="32"
-            [outerStrokeWidth]="4"
-            [innerStrokeWidth]="2.4"
+            [outerStrokeWidth]="3"
+            [innerStrokeWidth]="2"
             [outerStrokeColor]="'#d63b00'"
             [innerStrokeColor]="'#d6a073'"
             [titleFontSize]="16"
@@ -39,8 +39,9 @@
         </ion-col>
       </ion-row>
       <ion-row class="third-row">
-        <h5>{{movie.title}}</h5>
+        <h5 text-right="">{{movie.title}}</h5>
         <p>{{movie.overview}}</p>
+
       </ion-row>
     </ion-grid>
 

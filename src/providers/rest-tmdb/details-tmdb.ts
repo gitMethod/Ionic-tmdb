@@ -15,6 +15,10 @@ export class DetailsTmdbProvider {
     return this.http.get(AppSettings.API_BASE + 'movie/' + id + AppSettings.API_KEY + AppSettings.LANGUAGE);
   }
 
+  getMovieCredits(id){
+    return this.http.get(AppSettings.API_BASE + 'movie/' + id + '/credits' + AppSettings.API_KEY + AppSettings.LANGUAGE);
+  }
+
   getPerson(id){
     return this.http.get(AppSettings.API_BASE + 'person/' + id + AppSettings.API_KEY + AppSettings.LANGUAGE);
   }
@@ -22,5 +26,11 @@ export class DetailsTmdbProvider {
   getTv(id){
     return this.http.get(AppSettings.API_BASE + 'tv/' + id + AppSettings.API_KEY + AppSettings.LANGUAGE);
   }
+
+  getTvCredits(id){
+    return this.http.get(AppSettings.API_BASE + 'tv/' + id + '/credits' + AppSettings.API_KEY + AppSettings.LANGUAGE);
+  }
+
+
 
 }

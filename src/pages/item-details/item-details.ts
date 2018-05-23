@@ -12,15 +12,15 @@ export class ItemDetailsPage {
 
   poster: any = '';
   movie: any = '';
+  details: any = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private detailsTmdb: DetailsTmdbProvider) {
     let obj = navParams.get('movie');
     this.poster = obj.poster_path;
 
     detailsTmdb.getMovie(obj.id).subscribe( data => {
-      console.log(data);
       this.movie = data;
-
+      console.log(this.movie);
     });
   }
 
