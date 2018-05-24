@@ -57,9 +57,11 @@ export class PeoplePage {
 
   pushDetailsPage(i){
     this.app.getRootNav().push(ItemDetailsPage,{
+
       'id': this.people[i].id,
       'poster': this.people[i].profile_path,
-      'type': this.tabShowed.name
+      'type': this.tabShowed.name,
+      'ranking': i
     });
   }
 

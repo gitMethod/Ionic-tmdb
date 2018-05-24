@@ -19,12 +19,14 @@ export class ItemDetailsPage {
   rating: any = '';
   title: any = '';
   description: any = '';
+  circleTitle: any = '';
+  circleUnits: any = '';
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private detailsTmdb: DetailsTmdbProvider, private circleOptions: CircleProgressOptions) {
 
     this.poster = navParams.get('poster');
-    console.log(navParams.get('type'));
     this.chooseEndPoint(navParams.get('type'), navParams.get('id'));
 
   }
@@ -46,9 +48,10 @@ export class ItemDetailsPage {
 
   loadMovie(id){
     let movie;
-    this.detailsTmdb.getMovie(this.navParams.get('id')).subscribe( data => {
+    this.detailsTmdb.getMovie(id).subscribe( data => {
       movie = data;
-      this.circleOptions.units = '%';
+      this.circleUnits = '%';
+      this.circleTitle = movie.vote_average;
       this.backdrop = movie.backdrop_path;
       this.rating = movie.vote_average;
       this.firstSubtitle = movie.release_date.substr(0,4);
@@ -61,14 +64,15 @@ export class ItemDetailsPage {
 
   loadPeople(id){
     let people;
-    this.detailsTmdb.getPerson(this.navParams.get('id')).subscribe( data => {
-      this.circleOptions.units = '#';
+    this.detailsTmdb.getPerson(id).subscribe( data => {
       people = data;
+      this.circleUnits = '#';
+      this.circleTitle = this.navParams.get('ranking') + 1;
       this.backdrop = people.backdrop_path;
       this.rating = 10;
-      this.firstSubtitle = 'born ' + people.birthday;
+      this.firstSubtitle = 'Born ' + people.birthday;
       this.secondSubtitle = people.place_of_birth;
-      this.thirdSubtitle = 'popularty ' + people.popularity;
+      this.thirdSubtitle = 'Popularty ' + people.popularity;
       this.title = people.name;
       this.description = people.biography;
     });
@@ -76,10 +80,10 @@ export class ItemDetailsPage {
 
   loadTv(id){
     let tv;
-    this.detailsTmdb.getTv(this.navParams.get('id')).subscribe( data => {
-      this.circleOptions.units = '%';
-      console.log(data);
+    this.detailsTmdb.getTv(id).subscribe( data => {
       tv = data;
+      this.circleUnits = '%';
+      this.circleTitle = tv.vote_average;
       this.backdrop = tv.backdrop_path;
       this.rating = tv.vote_average;
       this.firstSubtitle = tv.first_air_date.substr(0,4);

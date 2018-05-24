@@ -19,6 +19,8 @@
         </ion-col>
         <ion-col align-self-end="" text-center="" [hidden]="">
           <circle-progress
+            [units]="circleUnits"
+            [title]="circleTitle"
             [showSubtitle]="false"
             [subtitleFontSize]="16"
             [percent]="rating * 10"
