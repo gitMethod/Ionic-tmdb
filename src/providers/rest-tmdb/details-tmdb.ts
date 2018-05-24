@@ -15,8 +15,9 @@ export class DetailsTmdbProvider {
     return this.http.get(AppSettings.API_BASE + 'movie/' + id + AppSettings.API_KEY);
   }
 
-  getMovieCredits(id){
-    return this.http.get(AppSettings.API_BASE + 'movie/' + id + '/credits' + AppSettings.API_KEY);
+
+  getTv(id){
+    return this.http.get(AppSettings.API_BASE + 'tv/' + id + AppSettings.API_KEY);
   }
 
   getPerson(id){
@@ -24,17 +25,18 @@ export class DetailsTmdbProvider {
   }
 
   getPersonImages(id){
-    return this.http.get(AppSettings.API_BASE + 'person/' + id +'/tagged_images'+ AppSettings.API_KEY);
+    return this.http.get(AppSettings.API_BASE + 'person/' + id +'/tagged_images'+ AppSettings.API_KEY).
+    map( data=>{
+      console.log(data);
+      return this.findPersonBackdrop(data)
+    });
   }
 
-  getTv(id){
-    return this.http.get(AppSettings.API_BASE + 'tv/' + id + AppSettings.API_KEY);
+  findPersonBackdrop(array){
+    return array.results
+      .filter(image => image.aspect_ratio === 1.7777777777778)
+      .map(backdrop => backdrop.file_path);
   }
-
-  getTvCredits(id){
-    return this.http.get(AppSettings.API_BASE + 'tv/' + id + '/credits' + AppSettings.API_KEY);
-  }
-
 
 
 }

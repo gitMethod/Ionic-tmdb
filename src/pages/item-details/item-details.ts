@@ -62,22 +62,6 @@ export class ItemDetailsPage {
     });
   }
 
-  loadPeople(id){
-    let people;
-    this.detailsTmdb.getPerson(id).subscribe( data => {
-      people = data;
-      this.circleUnits = '#';
-      this.circleTitle = this.navParams.get('ranking') + 1;
-      this.backdrop = people.backdrop_path;
-      this.rating = 10;
-      this.firstSubtitle = 'Born ' + people.birthday;
-      this.secondSubtitle = people.place_of_birth;
-      this.thirdSubtitle = 'Popularty ' + people.popularity;
-      this.title = people.name;
-      this.description = people.biography;
-    });
-  }
-
   loadTv(id){
     let tv;
     this.detailsTmdb.getTv(id).subscribe( data => {
@@ -93,6 +77,25 @@ export class ItemDetailsPage {
       this.description = tv.overview;
     });
   }
+
+  loadPeople(id){
+    let people;
+    this.detailsTmdb.getPersonImages(id).subscribe( data=>{
+      this.backdrop = data[0];
+    });
+    this.detailsTmdb.getPerson(id).subscribe( data => {
+      people = data;
+      this.circleUnits = '#';
+      this.circleTitle = this.navParams.get('ranking') + 1;
+
+      this.rating = 10;
+      this.firstSubtitle = 'Born ' + people.birthday.substr(0,4);
+      this.secondSubtitle = people.place_of_birth;
+      this.title = people.name;
+      this.description = people.biography;
+    });
+  }
+
 
 
   ionViewWillEnter() {
