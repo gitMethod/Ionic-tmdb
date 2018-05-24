@@ -14,10 +14,10 @@
 
     <ion-grid>
       <ion-row class="second-row">
-        <ion-col>
+        <ion-col col-4="">
           <img [src]="poster">
         </ion-col>
-        <ion-col align-self-end="" text-center="">
+        <ion-col align-self-end="" text-center="" [hidden]="">
           <circle-progress
             [showSubtitle]="false"
             [subtitleFontSize]="16"
@@ -34,14 +34,13 @@
         </ion-col>
         <ion-col align-self-end="">
           <div>{{firstSubtitle}}</div>
-          <div>{{secondSubtitle + ' minutes'}}</div>
-          <div>{{thirdSubtitle + ' votes'}}</div>
+          <div>{{secondSubtitle}}</div>
+          <div>{{thirdSubtitle}}</div>
         </ion-col>
       </ion-row>
       <ion-row class="third-row">
         <h5 text-right="">{{title}}</h5>
         <p>{{description}}</p>
-
       </ion-row>
     </ion-grid>
 

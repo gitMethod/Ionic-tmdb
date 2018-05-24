@@ -53,8 +53,12 @@ export class TvShowsPage {
     )
   }
 
-  pushDetailsPage(){
-    this.app.getRootNav().push(ItemDetailsPage);
+  pushDetailsPage(i){
+    this.app.getRootNav().push(ItemDetailsPage,{
+      'id': this.tvs[i].id,
+      'poster': this.tvs[i].poster_path,
+      'type': this.tabShowed.name});
   }
+
 
 }

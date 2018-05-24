@@ -56,8 +56,12 @@ export class PeoplePage {
   }
 
   pushDetailsPage(i){
-    this.app.getRootNav().push(ItemDetailsPage,{'passedData': this.people[i]});
-    console.log(this.people[i]);
+    this.app.getRootNav().push(ItemDetailsPage,{
+      'id': this.people[i].id,
+      'poster': this.people[i].profile_path,
+      'type': this.tabShowed.name
+    });
   }
+
 
 }
