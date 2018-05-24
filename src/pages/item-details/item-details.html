@@ -9,7 +9,7 @@
 <ion-content>
   <div>
     <div class="backdrop">
-      <img [src]=" 'http://image.tmdb.org/t/p/w300' + movie.backdrop_path" >
+      <img [src]=" 'http://image.tmdb.org/t/p/w300' + backdrop" >
     </div>
 
     <ion-grid>
@@ -21,7 +21,7 @@
           <circle-progress
             [showSubtitle]="false"
             [subtitleFontSize]="16"
-            [percent]="movie.vote_average * 10"
+            [percent]="rating * 10"
             [radius]="32"
             [outerStrokeWidth]="3"
             [innerStrokeWidth]="2"
@@ -33,14 +33,14 @@
           ></circle-progress>
         </ion-col>
         <ion-col align-self-end="">
-          <div>{{movie.release_date}}</div>
-          <div>{{movie.runtime + ' minutes'}}</div>
-          <div>{{movie.vote_count + ' votes'}}</div>
+          <div>{{firstSubtitle}}</div>
+          <div>{{secondSubtitle + ' minutes'}}</div>
+          <div>{{thirdSubtitle + ' votes'}}</div>
         </ion-col>
       </ion-row>
       <ion-row class="third-row">
-        <h5 text-right="">{{movie.title}}</h5>
-        <p>{{movie.overview}}</p>
+        <h5 text-right="">{{title}}</h5>
+        <p>{{description}}</p>
 
       </ion-row>
     </ion-grid>

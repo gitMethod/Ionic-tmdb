@@ -54,7 +54,10 @@ export class MoviesPage {
   }
 
   pushDetailsPage(i){
-    this.app.getRootNav().push(ItemDetailsPage,{'movie': this.movies[i]});
+    this.app.getRootNav().push(ItemDetailsPage,{
+      'id': this.movies[i].id,
+      'poster': this.movies[i].poster_path,
+      'type': this.tabShowed.name});
   }
 
 }

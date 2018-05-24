@@ -5,6 +5,7 @@ import {PeopleDataProvider} from '../../providers/shared-data/people-data';
 import {AppList} from '../../models/app-list';
 import {ItemDetailsPage} from '../item-details/item-details';
 import {AppTab} from '../../models/app-tab';
+import {convertDeepLinkConfigEntriesToString} from '@ionic/app-scripts/dist/deep-linking/util';
 
 
 @IonicPage()
@@ -54,8 +55,9 @@ export class PeoplePage {
     )
   }
 
-  pushDetailsPage(){
-    this.app.getRootNav().push(ItemDetailsPage);
+  pushDetailsPage(i){
+    this.app.getRootNav().push(ItemDetailsPage,{'passedData': this.people[i]});
+    console.log(this.people[i]);
   }
 
 }

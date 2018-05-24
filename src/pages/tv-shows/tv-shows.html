@@ -8,7 +8,7 @@
 <ion-content>
   <ion-grid no-padding="">
     <ion-row>
-      <ion-col col-4 col-sm-3 col-md-2 *ngFor="let tv of tvs">
+      <ion-col col-4 col-sm-3 col-md-2 *ngFor="let tv of tvs; let i = index" (click)="pushDetailsPage(i)" >
         <img [src]="tv.poster_path" no-margin="" style="min-height: 100%; min-width: 100%;  margin-bottom: -4px">
         <div *ngIf="tv.poster_path.indexOf('assets') !== -1" class="centered">{{tv.name}}</div>
       </ion-col>
