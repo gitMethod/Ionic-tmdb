@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {App, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {SearchBarProvider} from '../../providers/shared-data/search-bar.provider';
 import {MultiSearchProvider} from '../../providers/rest-tmdb/search-rest';
 import {Subscription} from 'rxjs/Subscription';
+import {ItemDetailsPage} from '../item-details/item-details';
 
 @IonicPage()
 @Component({
@@ -11,34 +12,47 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class SearchPage {
 
-  resultArr : any[] = [];
+  resultArr: any[] = [];
   resultPosters: any[] = [];
   subscription: Subscription;
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private searchBarProvider: SearchBarProvider,
-    private multiSearchProvider: MultiSearchProvider
+    public navCtrl: NavController, public navParams: NavParams, private searchBarProvider: SearchBarProvider,
+    private multiSearchProvider: MultiSearchProvider, private  app: App
   ) {
-    this.subscription = this.searchBarProvider.searchString.subscribe((value) =>{
+    this.subscription = this.searchBarProvider.searchString.subscribe((value) => {
       this.loadSearchResults(value);
     });
   }
 
   loadSearchResults(val: string) {
-    if (val){
+    if (val) {
       this.multiSearchProvider.getSearchResults(val).subscribe(
-        data => { this.resultArr = data},
-        err => {console.log(err)}
+        data => {
+          console.log(data);
+          this.resultArr = data
+        },
+        err => {
+          console.log(err)
+        }
       )
     } else {
       this.resultPosters = [];
     }
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
+  pushDetailsPage(i){
+    this.app.getRootNav().push(ItemDetailsPage,{
+      'id': this.resultArr[i].id,
+      'poster': ( this.resultArr[i].poster_path ? this.resultArr[i].poster_path : this.resultArr[i].profile_path),
+      'type': this.resultArr[i].media_type,
+      'ranking': i
+    });
+  }
+
 }
+

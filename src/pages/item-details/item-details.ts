@@ -27,6 +27,7 @@ export class ItemDetailsPage {
               private detailsTmdb: DetailsTmdbProvider, private circleOptions: CircleProgressOptions) {
 
     this.poster = navParams.get('poster');
+    console.log(navParams.get('type'));
     this.chooseEndPoint(navParams.get('type'), navParams.get('id'));
 
   }
@@ -35,12 +36,15 @@ export class ItemDetailsPage {
   chooseEndPoint(type, id){
     switch (type) {
       case 'MOVIES':
+      case 'movie':
         this.loadMovie(id);
         break;
       case 'TV':
+      case 'tv':
         this.loadTv(id);
         break;
       case 'PEOPLE':
+      case 'person':
         this. loadPeople(id);
         break;
     }
