@@ -52,7 +52,7 @@ export class ItemDetailsPage {
       movie = data;
       this.circleUnits = '%';
       this.circleTitle = movie.vote_average;
-      this.backdrop = movie.backdrop_path;
+      this.backdrop =  movie.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + movie.backdrop_path) : 'assets/imgs/backdrop_movie.jpg';
       this.rating = movie.vote_average;
       this.firstSubtitle = movie.release_date.substr(0,4);
       this.secondSubtitle = movie.runtime + ' minutes';
@@ -68,7 +68,7 @@ export class ItemDetailsPage {
       tv = data;
       this.circleUnits = '%';
       this.circleTitle = tv.vote_average;
-      this.backdrop = tv.backdrop_path;
+      this.backdrop =  tv.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + tv.backdrop_path) : 'assets/imgs/backdrop_tv.jpg';
       this.rating = tv.vote_average;
       this.firstSubtitle = tv.first_air_date.substr(0,4);
       this.secondSubtitle = tv.episode_run_time + ' minutes';
@@ -81,21 +81,20 @@ export class ItemDetailsPage {
   loadPeople(id){
     let people;
     this.detailsTmdb.getPersonImages(id).subscribe( data=>{
-      this.backdrop = data[0];
+      this.backdrop =  data[0];
     });
     this.detailsTmdb.getPerson(id).subscribe( data => {
+      console.log(data);
       people = data;
       this.circleUnits = '#';
       this.circleTitle = this.navParams.get('ranking') + 1;
-
       this.rating = 10;
-      this.firstSubtitle = 'Born ' + people.birthday.substr(0,4);
+      this.firstSubtitle = people.birthday;
       this.secondSubtitle = people.place_of_birth;
       this.title = people.name;
       this.description = people.biography;
     });
   }
-
 
 
   ionViewWillEnter() {
