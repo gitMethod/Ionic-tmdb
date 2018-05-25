@@ -29,7 +29,10 @@ export class MyApp {
       splashScreen.hide();
       timer(3000).subscribe(()=> this.showSplash = false);
     });
-    events.subscribe('activeTab',(data) => { this.activeTab = data });
+    events.subscribe('activeTab',(data) => {
+      console.log(data + 'from main');
+      this.activeTab = data ;
+    });
     this.imageLoaderConfig.setMaximumCacheAge(168 * 60 * 60 * 1000);
     this.imageLoaderConfig.enableSpinner(true);
   }

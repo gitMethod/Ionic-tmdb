@@ -7,7 +7,7 @@ import { TabsPage } from './main-tabs';
     TabsPage,
   ],
   imports: [
-    IonicPageModule.forChild(TabsPage),
+    IonicPageModule.forChild(TabsPage)
   ],
 })
 export class TabsPageModule {}

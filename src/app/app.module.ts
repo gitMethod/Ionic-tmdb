@@ -23,6 +23,7 @@ import {ItemDetailsPage} from '../pages/item-details/item-details';
 import {IonicImageLoader} from 'ionic-image-loader';
 import { DetailsTmdbProvider } from '../providers/rest-tmdb/details-tmdb';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import {SuperTabsModule} from 'ionic2-super-tabs';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicImageLoader.forRoot(),
-    NgCircleProgressModule.forRoot()
+    NgCircleProgressModule.forRoot(),
+    SuperTabsModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

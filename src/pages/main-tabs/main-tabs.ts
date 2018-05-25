@@ -4,7 +4,6 @@ import {MoviesPage} from '../movies/movies';
 import {PeoplePage} from '../people/people';
 import {TvShowsPage} from '../tv-shows/tv-shows';
 
-
 @IonicPage()
 @Component({
   selector: 'page-tabs',
@@ -16,13 +15,12 @@ export class TabsPage{
   tab2Root = TvShowsPage;
   tab3Root = PeoplePage;
 
-  @ViewChild('mainTabs') tabRef: Tabs;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events ) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events) {
-
+    this.events.publish('activeTab',0);
   }
 
-  tabChanged() {
-    this.events.publish('activeTab',this.tabRef.getSelected().tabTitle);
+  tabChanged(event) {
+    this.events.publish('activeTab',event.index);
   }
 }

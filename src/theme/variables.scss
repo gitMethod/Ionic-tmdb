@@ -77,7 +77,7 @@ $colors: (
 // so that the above variables are used and Ionic's
 // default are overridden.
 
-@import "ionic.theme.default";
+@import 'ionic.theme.default';
 
 
 // Ionicons
@@ -93,3 +93,5 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+@import '../../node_modules/ionic2-super-tabs/dist/components/super-tabs.scss';

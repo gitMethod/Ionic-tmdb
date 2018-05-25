@@ -17,6 +17,7 @@ export class FilterModalPage {
   showedList: AppList;
   showedTab: AppTab;
   menuIndex: number;
+  tabindex: any = '';
 
   knobValues: any = {
     upper: 0,
@@ -26,6 +27,8 @@ export class FilterModalPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events,
     private peopleData: PeopleDataProvider, private moviesData: MoviesData, private tvData: TvDataProvider) {
 
+    this.tabindex = this.navParams.get('activeTab');
+    console.log(this.tabindex);
     this.showedTab = this.findActiveData().tabsObs.getValue();
     this.showedList = this.findActiveData().listObs.getValue();
     this.menuIndex = this.findListIndex(this.showedList);
@@ -74,12 +77,13 @@ export class FilterModalPage {
   }
 
   findActiveData(){
-    switch (this.navParams.get('activeTab')){
-      case 'MOVIES':
+    console.log(this.tabindex);
+    switch (this.tabindex + ''){
+      case '0':
         return this.moviesData;
-      case 'TV-SHOWS':
+      case '1':
         return this.tvData;
-      case 'PEOPLE':
+      case '2':
         return this.peopleData;
       default:
 
