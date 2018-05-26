@@ -1,6 +1,13 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title></ion-title>
+  <ion-navbar color="orangeMain">
+    <ion-buttons left="">
+      <ion-searchbar
+        [animated]="true"
+        (ionInput)="searchValue($event)"
+        (ionClear)="emptyValue()"
+        [debounce]="300"
+      ></ion-searchbar>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

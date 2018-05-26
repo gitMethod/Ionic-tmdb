@@ -38,7 +38,7 @@ export class MoviesPage {
           this.infiniteScrollStatus = false;
         } else {
           this.movies = this.movies.concat(data);
-          this.listShowed.responsePage += 3;
+          this.listShowed.responsePage += 1;
           if (infiniteScroll) {
             infiniteScroll.complete();
           }

@@ -22,12 +22,8 @@ export class ListsRest {
       dateSince = '&first_air_date.gte=';
       dateUntil = '&first_air_date.lte='
     }
-    return Observable.forkJoin(
-      this.http.get(appList.apiUrl + dateSince + appList.minRange + dateUntil + appList.maxRange +'&page=' + appList.responsePage),
-      this.http.get(appList.apiUrl + dateSince + appList.minRange + dateUntil + appList.maxRange +'&page=' +(appList.responsePage + 1)),
-      this.http.get(appList.apiUrl + dateSince + appList.minRange + dateUntil + appList.maxRange +'&page=' +(appList.responsePage + 2))
-
-    ).map(result=>{
+    return this.http.get(appList.apiUrl + dateSince + appList.minRange + dateUntil + appList.maxRange +'&page=' + appList.responsePage)
+    .map(result=>{
       let tmpArray = this.concatArray(result);
       tmpArray = this.removeNullItems(tmpArray);
       tmpArray = this.updatePathImg(tmpArray);
@@ -36,11 +32,7 @@ export class ListsRest {
   }
 
   concatArray(result: any){
-    let tempArray = [];
-    tempArray = tempArray.concat(result[0].results);
-    tempArray = tempArray.concat(result[1].results);
-    tempArray = tempArray.concat(result[2].results);
-    return tempArray;
+    return  result.results;
   }
 
   updatePathImg(array: any[]) {

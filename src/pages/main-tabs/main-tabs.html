@@ -1,7 +1,42 @@
+<ion-header>
+  <ion-navbar color="orangeMain">
+    <ion-buttons left="">
+      <button ion-button="" menuToggle="" style="margin-right: 0">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
 
+    <ion-buttons left="" *ngIf="!isSearchBarOpened">
+      <ion-title >Theatron</ion-title>
+    </ion-buttons>
 
-<super-tabs  tabsPlacement="bottom" (tabSelect)="tabChanged($event)" [config]="{ sideMenu: 'left' }" toolbarBackground="orangeMain">
-  <super-tab [root]="tab1Root" title="MOVIES"></super-tab>
-  <super-tab [root]="tab2Root" title="TV-SHOWS"></super-tab>
-  <super-tab [root]="tab3Root" title="PEOPLE"></super-tab>
-</super-tabs>
+    <ion-buttons right="">
+      <button
+        ion-button=""
+        icon-only=""
+        (click)="openSearchPage()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons right="">
+      <button ion-button="" style="margin-right: 0; ; width: 40px" (click)="presentFilterModal()">
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <super-tabs
+    tabsPlacement="top"
+    (tabSelect)="tabChanged($event)"
+    [config]="{ sideMenu: 'left' }"
+    toolbarBackground="orangeMain"
+    [scrollTabs]="true">
+    <super-tab [root]="tab1Root" title="MOVIES"></super-tab>
+    <super-tab [root]="tab2Root" title="TV-SHOWS"></super-tab>
+    <super-tab [root]="tab3Root" title="PEOPLE"></super-tab>
+  </super-tabs>
+</ion-content>
+

@@ -101,12 +101,15 @@ export class ItemDetailsPage {
   }
 
 
+
   ionViewWillEnter() {
     document.querySelector("ion-navbar")['style'].display = 'none';
+    document.querySelector("super-tabs-toolbar")['style'].display = 'none';
   }
 
   ionViewWillLeave() {
     document.querySelector("ion-navbar")['style'].display = 'flex';
+    document.querySelector("super-tabs-toolbar")['style'].display = 'flex';
   }
 
 

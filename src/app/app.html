@@ -2,44 +2,7 @@
   <div class="spinner"></div>
 </div>
 
-<ion-header>
-  <ion-navbar color="orangeMain">
-    <ion-buttons left="">
-      <button ion-button="" menuToggle="" style="margin-right: 0">
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-
-    <ion-buttons left="" *ngIf="!isSearchBarOpened">
-      <ion-title >Theatron</ion-title>
-    </ion-buttons>
-
-    <ion-buttons right="">
-      <ion-searchbar
-        *ngIf="isSearchBarOpened"
-        [showCancelButton]="true"
-        (ionCancel)="isSearchBarOpened=false; searchClosed()"
-         placeholder="Search"
-        (ionInput)="searchValue($event)"
-        (ionClear)="emptyValue()"
-        [debounce]="500"
-      ></ion-searchbar>
-      <button
-        ion-button=""
-        icon-only=""
-        *ngIf="!isSearchBarOpened"
-        (click)="isSearchBarOpened=true; openSearchPage()">
-        <ion-icon name="search"></ion-icon>
-      </button>
-    </ion-buttons>
-
-    <ion-buttons right="" *ngIf="!isSearchBarOpened">
-      <button ion-button="" style="margin-right: 0; ; width: 40px" (click)="presentFilterModal()">
-        <ion-icon name="funnel"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
+<ion-nav [root]="rootPage" #content></ion-nav>
 
 <ion-menu [content]="content" type="overlay">
   <ion-header>
@@ -55,6 +18,6 @@
   </ion-content>
 </ion-menu>
 
-<ion-nav [root]="rootPage" #content></ion-nav>
+
 
 
