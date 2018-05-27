@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import {App, IonicPage, NavController} from 'ionic-angular';
+import {App, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ListsRest} from '../../providers/rest-tmdb/lists-rest';
 import {MoviesData} from '../../providers/shared-data/movies-data';
 import {ItemDetailsPage} from '../item-details/item-details';
@@ -17,9 +17,12 @@ export class MoviesPage {
   listShowed: AppList;
   movies = [];
   infiniteScrollStatus = true;
+  rootNavCtrl: NavController;
 
-  constructor(private listsRest: ListsRest, private moviesData: MoviesData,
+  constructor(private listsRest: ListsRest, private moviesData: MoviesData, public navParams: NavParams,
               public navCtrl: NavController, private  app: App) {
+    this.rootNavCtrl = navParams.get('rootNavCtrl');
+
     moviesData.tabsObs.subscribe((value) =>{
       this.tabShowed = value;
     });
@@ -54,7 +57,7 @@ export class MoviesPage {
   }
 
   pushDetailsPage(i){
-    this.app.getRootNav().push(ItemDetailsPage,{
+    this.rootNavCtrl.push(ItemDetailsPage,{
       'id': this.movies[i].id,
       'poster': this.movies[i].poster_path,
       'type': this.tabShowed.name});

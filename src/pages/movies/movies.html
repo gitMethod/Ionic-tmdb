@@ -3,8 +3,14 @@
   <ion-grid no-padding="">
     <ion-row>
       <ion-col col-4 col-sm-3 col-md-2 *ngFor="let movie of movies; let i = index" (click)="pushDetailsPage(i)">
-        <img [src]="movie.poster_path" />
-        <div *ngIf="movie.poster_path.indexOf('assets') !== -1" class="centered">{{movie.title}}</div>
+        <img-loader
+          [useImg]="true"
+          [src]="movie.poster_path"
+          no-margin=""
+          fallback="assets/imgs/movieposter.jpg"
+          [fallbackAsPlaceholder]="true"
+        ></img-loader>
+        <div *ngIf="!movie.poster_path" class="centered">{{movie.title}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>

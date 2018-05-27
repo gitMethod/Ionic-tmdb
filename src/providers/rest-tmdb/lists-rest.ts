@@ -5,12 +5,14 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/observable/forkJoin';
 import {AppList} from '../../models/app-list';
 import 'rxjs/add/operator/delay';
+import {ImageLoader} from 'ionic-image-loader';
+import {isNullOrUndefined} from 'util';
 
 
 @Injectable()
 export class ListsRest {
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, public imageLoader: ImageLoader) {}
 
   getList(appList: AppList, tabName: string): Observable<any> {
     let dateSince = '';
@@ -24,46 +26,41 @@ export class ListsRest {
     }
     return this.http.get(appList.apiUrl + dateSince + appList.minRange + dateUntil + appList.maxRange +'&page=' + appList.responsePage)
     .map(result=>{
-      let tmpArray = this.concatArray(result);
-      tmpArray = this.removeNullItems(tmpArray);
+      let tmpArray = this.removeNullItems(result);
+      this.preloadImg(tmpArray);
       tmpArray = this.updatePathImg(tmpArray);
+      console.log(tmpArray);
       return tmpArray;
     });
   }
 
-  concatArray(result: any){
-    return  result.results;
+  removeNullItems(object) {
+    let array = object.results;
+    array.filter(item=>{
+      return item != null || item != undefined
+    });
+    return array;
   }
 
-  updatePathImg(array: any[]) {
-    for (let item of array) {
-      if (item.poster_path === null || item.profile_path === null) {
-        if (item.first_air_date){
-          item.poster_path = 'assets/imgs/tvposter.jpg'
-        } else if(item.release_date){
-          item.poster_path = 'assets/imgs/movieposter.jpg';
-        } else {
-          item.profile_path = 'assets/imgs/peopleposter.jpg';
-        }
+  updatePathImg(array) {
+    array.forEach(item=>{
+      if(item.poster_path){
+        item.poster_path = 'http://image.tmdb.org/t/p/w154' + item.poster_path;
       } else {
-        if(item.poster_path){
-          item.poster_path = 'http://image.tmdb.org/t/p/w154' + item.poster_path;
-        } else {
-          item.profile_path = 'http://image.tmdb.org/t/p/w154' + item.profile_path;
-        }
+        item.profile_path = 'http://image.tmdb.org/t/p/w154' + item.profile_path;
       }
-    }
+    });
     return array;
   }
 
-  removeNullItems(array: any[]) {
-    for (let i = array.length - 1; i >= 0; --i) {
-      if (!array[i]) {
-        array.splice(i, 1);
-      }
-    }
-    return array;
+  preloadImg(array){
+    array.forEach(item=>{
+      this.imageLoader.preload('http://image.tmdb.org/t/p/w154' + item.profile_path)
+    })
   }
+
+
+
 
 
 }

@@ -32,7 +32,6 @@ export class DetailsTmdbProvider {
   }
 
   findPersonBackdrop(array){
-    console.log(array);
     if( array.results.length === 0){
       return array = ['assets/imgs/backdrop_people.jpg']
     } else {

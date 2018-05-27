@@ -4,7 +4,15 @@
     <ion-row>
       <ion-col col-4 col-sm-3 col-md-2 *ngFor="let people of people; let i = index" style="background: #2b2b2b" (click)="pushDetailsPage(i)">
         <div class="hero-image">
-        <img [src]="people.profile_path" no-margin="" style="min-height: 100%; min-width: 100%">
+          <img-loader
+            [useImg]="true"
+            [src]="people.profile_path"
+            no-margin=""
+            style="min-height: 100%; min-width: 100%"
+            fallback="assets/imgs/peopleposter.jpg"
+            [fallbackAsPlaceholder]="true"
+          >
+          </img-loader>
         </div>
         <div class="people-centered">{{people.name}}</div>
       </ion-col>

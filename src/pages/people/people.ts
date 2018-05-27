@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {App, IonicPage, NavController} from 'ionic-angular';
+import {App, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ListsRest} from '../../providers/rest-tmdb/lists-rest';
 import {PeopleDataProvider} from '../../providers/shared-data/people-data';
 import {AppList} from '../../models/app-list';
@@ -19,9 +19,11 @@ export class PeoplePage {
   listShowed: AppList;
   people = [];
   infiniteScrollStatus = true;
+  rootNavCtrl: NavController;
 
-  constructor(private listsRest: ListsRest, private peopleData: PeopleDataProvider,
+  constructor(private listsRest: ListsRest, private peopleData: PeopleDataProvider, public navParams: NavParams,
               public navCtrl: NavController, private  app: App) {
+    this.rootNavCtrl = navParams.get('rootNavCtrl');
     peopleData.tabsObs.subscribe((value) =>{
       this.tabShowed = value;
     });
@@ -56,7 +58,7 @@ export class PeoplePage {
   }
 
   pushDetailsPage(i){
-    this.app.getRootNav().push(ItemDetailsPage,{
+    this.rootNavCtrl.push(ItemDetailsPage,{
 
       'id': this.people[i].id,
       'poster': this.people[i].profile_path,
