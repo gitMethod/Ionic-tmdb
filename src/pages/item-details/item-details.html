@@ -15,7 +15,10 @@
     <ion-grid>
       <ion-row class="second-row">
         <ion-col col-4="">
-          <img [src]="poster">
+          <img-loader
+            [useImg]="true"
+            [src]="poster"
+          ></img-loader>
         </ion-col>
         <ion-col align-self-end="" text-center="" [hidden]="">
           <circle-progress

@@ -5,8 +5,9 @@
       <ion-col col-4 col-sm-3 col-md-2 *ngFor="let movie of movies; let i = index" (click)="pushDetailsPage(i)">
         <img-loader
           [useImg]="true"
-          [src]="movie.poster_path"
+          [src]="'http://image.tmdb.org/t/p/w154' + movie.poster_path"
           no-margin=""
+          width="100%"
           fallback="assets/imgs/movieposter.jpg"
           [fallbackAsPlaceholder]="true"
         ></img-loader>

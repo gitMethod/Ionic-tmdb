@@ -21,15 +21,12 @@ export class ItemDetailsPage {
   description: any = '';
   circleTitle: any = '';
   circleUnits: any = '';
+  fallback: any = '';
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private detailsTmdb: DetailsTmdbProvider, private circleOptions: CircleProgressOptions) {
-
-    this.poster = navParams.get('poster');
-    console.log(navParams.get('type'));
     this.chooseEndPoint(navParams.get('type'), navParams.get('id'));
-
   }
 
 
@@ -57,6 +54,8 @@ export class ItemDetailsPage {
       this.circleUnits = '%';
       this.circleTitle = movie.vote_average;
       this.backdrop =  movie.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + movie.backdrop_path) : 'assets/imgs/backdrop_movie.jpg';
+      this.poster = this.navParams.get('poster')
+        ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/movieposter.jpg';
       this.rating = movie.vote_average;
       this.firstSubtitle = movie.release_date.substr(0,4);
       this.secondSubtitle = movie.runtime + ' minutes';
@@ -73,6 +72,8 @@ export class ItemDetailsPage {
       this.circleUnits = '%';
       this.circleTitle = tv.vote_average;
       this.backdrop =  tv.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + tv.backdrop_path) : 'assets/imgs/backdrop_tv.jpg';
+      this.poster = this.navParams.get('poster')
+        ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/tvposter.jpg';
       this.rating = tv.vote_average;
       this.firstSubtitle = tv.first_air_date.substr(0,4);
       this.secondSubtitle = tv.episode_run_time + ' minutes';
@@ -90,6 +91,8 @@ export class ItemDetailsPage {
     this.detailsTmdb.getPerson(id).subscribe( data => {
       console.log(data);
       people = data;
+      this.poster = this.navParams.get('poster')
+        ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/peopleposter.jpg';
       this.circleUnits = '#';
       this.circleTitle = this.navParams.get('ranking') + 1;
       this.rating = 10;

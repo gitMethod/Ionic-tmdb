@@ -28,8 +28,6 @@ export class ListsRest {
     .map(result=>{
       let tmpArray = this.removeNullItems(result);
       this.preloadImg(tmpArray);
-      tmpArray = this.updatePathImg(tmpArray);
-      console.log(tmpArray);
       return tmpArray;
     });
   }
@@ -38,17 +36,6 @@ export class ListsRest {
     let array = object.results;
     array.filter(item=>{
       return item != null || item != undefined
-    });
-    return array;
-  }
-
-  updatePathImg(array) {
-    array.forEach(item=>{
-      if(item.poster_path){
-        item.poster_path = 'http://image.tmdb.org/t/p/w154' + item.poster_path;
-      } else {
-        item.profile_path = 'http://image.tmdb.org/t/p/w154' + item.profile_path;
-      }
     });
     return array;
   }

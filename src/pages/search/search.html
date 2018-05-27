@@ -15,8 +15,28 @@
   <ion-list style="margin-top: 4px">
     <ion-item *ngFor="let result of resultArr; let i = index" style="padding-left: 8px" text-wrap="" (click)="pushDetailsPage(i)">
       <ion-thumbnail item-start style="margin: 4px 16px 4px 0; min-width: 60px">
-        <img *ngIf="result.poster_path" style="max-width: 54px" src="{{result.poster_path}}">
-        <img *ngIf="result.profile_path" style="max-width: 54px" src="{{result.profile_path}}">
+        <img-loader
+          [useImg]="true"
+          *ngIf="result.media_type === 'movie'"
+          [src]="'http://image.tmdb.org/t/p/w154' + result.poster_path"
+          fallback="assets/imgs/movieposter.jpg"
+          [fallbackAsPlaceholder]="true">
+        </img-loader>
+        <img-loader
+          [useImg]="true"
+          *ngIf="result.media_type === 'tv'"
+          [src]="'http://image.tmdb.org/t/p/w154' + result.poster_path"
+          fallback="assets/imgs/tvposter.jpg"
+          [fallbackAsPlaceholder]="true">
+        </img-loader>
+        <img-loader
+          [useImg]="true"
+          *ngIf="result.media_type === 'person'"
+          [src]="'http://image.tmdb.org/t/p/w154' + result.profile_path"
+          fallback="assets/imgs/peopleposter.jpg"
+          [fallbackAsPlaceholder]="true">
+        </img-loader>
+
       </ion-thumbnail>
       <span class="title">{{result.media_type}}</span>
       <span *ngIf="result.release_date" class="year">&nbsp;&nbsp;{{result.release_date.substr(0,4)}}</span>

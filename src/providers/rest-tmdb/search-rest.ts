@@ -23,29 +23,6 @@ export class MultiSearchProvider {
     tempArray = tempArray.concat(result[0].results);
     tempArray = tempArray.concat(result[1].results);
     tempArray = tempArray.concat(result[2].results);
-    this.updatePathImg(tempArray);
     return tempArray;
   }
-
-  updatePathImg(array: any[]) {
-    for (let item of array) {
-      if (item.poster_path === null || item.profile_path === null) {
-        if (item.first_air_date){
-          item.poster_path = 'assets/imgs/tvposter.jpg'
-        } else if(item.release_date){
-          item.poster_path = 'assets/imgs/movieposter.jpg';
-        } else {
-          item.profile_path = 'assets/imgs/peopleposter.jpg';
-        }
-      } else {
-        if(item.poster_path){
-          item.poster_path = 'http://image.tmdb.org/t/p/w154' + item.poster_path;
-        } else {
-          item.profile_path = 'http://image.tmdb.org/t/p/w154' + item.profile_path;
-        }
-      }
-    }
-    return array;
-  }
-
 }

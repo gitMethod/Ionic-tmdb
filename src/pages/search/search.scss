@@ -14,6 +14,10 @@ page-search {
   .item-md p {
     margin: 4px 0 2px 0;
   }
+
+  .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img {
+    max-width: 54px;
+  }
 }
 
 

@@ -65,6 +65,7 @@ export class PeoplePage {
       'type': this.tabShowed.name,
       'ranking': i
     });
+    console.log(this.people[i].profile_path);
   }
 
 
