@@ -49,6 +49,14 @@ page-item-details {
     color: #f4f4f4;
   }
 
+  .back-arrow {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)) !important;
+    position: relative;
+    top: 0;
+    right: 0;
+    z-index: +2;
+  }
+
 }
 
 

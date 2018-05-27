@@ -1,15 +1,8 @@
 
-<ion-header style="background-color: #ff7400">
-  <ion-navbar transparent="" >
-    <ion-title>Details</ion-title>
-  </ion-navbar>
-</ion-header>
-
-
 <ion-content>
   <div>
     <div class="backdrop">
-      <img [src]="backdrop" >
+      <img [src]="backdrop">
     </div>
 
     <ion-grid>
@@ -48,7 +41,9 @@
         <p>{{description}}</p>
       </ion-row>
     </ion-grid>
-
-
   </div>
 </ion-content>
+
+<ion-item no-lines="" class="back-arrow" >
+  <ion-icon name="arrow-back" color="light" (click)="popPage()"></ion-icon>
+</ion-item>

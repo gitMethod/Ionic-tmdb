@@ -103,7 +103,9 @@ export class ItemDetailsPage {
     });
   }
 
-
+  popPage(){
+    this.navCtrl.pop();
+  }
 
   ionViewWillEnter() {
     document.querySelector("ion-navbar")['style'].display = 'none';
