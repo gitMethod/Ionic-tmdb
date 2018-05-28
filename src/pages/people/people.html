@@ -4,17 +4,12 @@
     <ion-row>
       <ion-col col-4 col-sm-3 col-md-2 *ngFor="let people of people; let i = index" style="background: #2b2b2b" (click)="pushDetailsPage(i)">
         <div class="hero-image">
-          <img-loader
-            [useImg]="true"
+          <img
             [src]="'http://image.tmdb.org/t/p/w154' + people.profile_path"
-            no-margin=""
-            style="min-height: 100%; min-width: 100%"
-            fallback="assets/imgs/peopleposter.jpg"
-            [fallbackAsPlaceholder]="true"
-          >
-          </img-loader>
+            onerror="this.src='assets/imgs/newPeoplePoster.jpg'"
+          />
         </div>
-        <div class="people-centered">{{people.name}}</div>
+        <div class="people-centered">{{people.name | slice:0:40}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>

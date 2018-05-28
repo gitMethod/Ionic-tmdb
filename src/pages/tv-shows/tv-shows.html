@@ -3,15 +3,11 @@
   <ion-grid no-padding="">
     <ion-row>
       <ion-col col-4 col-sm-3 col-md-2 *ngFor="let tv of tvs; let i = index" (click)="pushDetailsPage(i)" >
-        <img-loader
-          [useImg]="true"
+        <img
           [src]="'http://image.tmdb.org/t/p/w154' + tv.poster_path"
-          no-margin=""
-          style="min-height: 100%; min-width: 100%"
-          fallback="assets/imgs/tvposter.jpg"
-          [fallbackAsPlaceholder]="true"
-        ></img-loader>
-        <div *ngIf="!tv.poster_path" class="centered">{{tv.name}}</div>
+          onerror="this.src='assets/imgs/newTvPoster.jpg'"
+        />
+        <div *ngIf="!tv.poster_path" class="centered">{{tv.name | slice:0:40}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>

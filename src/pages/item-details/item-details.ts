@@ -11,8 +11,8 @@ import {CircleProgressOptions} from 'ng-circle-progress';
 })
 export class ItemDetailsPage {
 
-  backdrop: any = '';
-  poster: any = '';
+  backdrop: any = 'assets/imgs/backHolder.jpg';
+  poster: any = 'assets/imgs/posterHolder.jpg';
   firstSubtitle: any = '';
   secondSubtitle: any = '';
   thirdSubtitle: any = '';
@@ -21,7 +21,6 @@ export class ItemDetailsPage {
   description: any = '';
   circleTitle: any = '';
   circleUnits: any = '';
-  fallback: any = '';
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -53,9 +52,9 @@ export class ItemDetailsPage {
       movie = data;
       this.circleUnits = '%';
       this.circleTitle = movie.vote_average;
-      this.backdrop =  movie.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + movie.backdrop_path) : 'assets/imgs/backdrop_movie.jpg';
+      this.backdrop =  movie.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + movie.backdrop_path) : 'assets/imgs/newMovieBack.jpg';
       this.poster = this.navParams.get('poster')
-        ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/movieposter.jpg';
+        ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/newMoviePoster.jpg';
       this.rating = movie.vote_average;
       this.firstSubtitle = movie.release_date.substr(0,4);
       this.secondSubtitle = movie.runtime + ' minutes';
@@ -71,9 +70,9 @@ export class ItemDetailsPage {
       tv = data;
       this.circleUnits = '%';
       this.circleTitle = tv.vote_average;
-      this.backdrop =  tv.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + tv.backdrop_path) : 'assets/imgs/backdrop_tv.jpg';
+      this.backdrop =  tv.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + tv.backdrop_path) : 'assets/imgs/newTvBack.jpg';
       this.poster = this.navParams.get('poster')
-        ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/tvposter.jpg';
+        ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/newTvPoster.jpg';
       this.rating = tv.vote_average;
       this.firstSubtitle = tv.first_air_date.substr(0,4);
       this.secondSubtitle = tv.episode_run_time + ' minutes';
@@ -92,7 +91,7 @@ export class ItemDetailsPage {
       console.log(data);
       people = data;
       this.poster = this.navParams.get('poster')
-        ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/peopleposter.jpg';
+        ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/newPeoplePoster.jpg';
       this.circleUnits = '#';
       this.circleTitle = this.navParams.get('ranking') + 1;
       this.rating = 10;

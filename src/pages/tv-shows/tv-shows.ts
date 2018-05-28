@@ -40,7 +40,7 @@ export class TvShowsPage {
           this.infiniteScrollStatus = false;
         } else {
           this.tvs = this.tvs.concat(data);
-          this.listShowed.responsePage += 3;
+          this.listShowed.responsePage += 1;
           if (infiniteScroll) {
             infiniteScroll.complete();
           }

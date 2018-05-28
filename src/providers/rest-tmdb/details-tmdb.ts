@@ -33,7 +33,7 @@ export class DetailsTmdbProvider {
 
   findPersonBackdrop(array){
     if( array.results.length === 0){
-      return array = ['assets/imgs/backdrop_people.jpg']
+      return array = ['assets/imgs/newPeopleBack.jpg']
     } else {
       return array.results
         .filter(image => image.aspect_ratio === 1.7777777777778)

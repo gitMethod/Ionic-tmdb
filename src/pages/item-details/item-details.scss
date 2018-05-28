@@ -8,6 +8,13 @@ page-item-details {
 
   .backdrop img{
     width: 100%;
+    border-bottom: 3px solid #d63b00;
+  }
+
+  .poster {
+    border: 3px solid #d63b00;
+    padding: 0;
+    margin-left: 3px;
   }
 
   ion-grid {

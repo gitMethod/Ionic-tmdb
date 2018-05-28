@@ -42,7 +42,7 @@ export class PeoplePage {
           this.infiniteScrollStatus = false;
         } else {
           this.people = this.people.concat(data);
-          this.listShowed.responsePage += 3;
+          this.listShowed.responsePage += 1;
           if (infiniteScroll) {
             infiniteScroll.complete();
           }

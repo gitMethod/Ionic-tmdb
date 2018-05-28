@@ -2,16 +2,17 @@
 <ion-content>
   <div>
     <div class="backdrop">
-      <img [src]="backdrop">
+      <img
+        [src]="backdrop"
+      />
     </div>
 
     <ion-grid>
       <ion-row class="second-row">
-        <ion-col col-4="">
-          <img-loader
-            [useImg]="true"
+        <ion-col col-4="" class="poster">
+          <img
             [src]="poster"
-          ></img-loader>
+          />
         </ion-col>
         <ion-col align-self-end="" text-center="" [hidden]="">
           <circle-progress
@@ -37,7 +38,7 @@
         </ion-col>
       </ion-row>
       <ion-row class="third-row">
-        <h5 text-right="">{{title}}</h5>
+        <h5 >{{title}}</h5>
         <p>{{description}}</p>
       </ion-row>
     </ion-grid>
