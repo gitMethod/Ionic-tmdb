@@ -5,7 +5,9 @@ import {PeopleDataProvider} from '../../providers/shared-data/people-data';
 import {AppList} from '../../models/app-list';
 import {ItemDetailsPage} from '../item-details/item-details';
 import {AppTab} from '../../models/app-tab';
-import {convertDeepLinkConfigEntriesToString} from '@ionic/app-scripts/dist/deep-linking/util';
+import {Observable} from 'rxjs/Observable';
+import { interval } from 'rxjs/observable/interval';
+import {timeout} from 'rxjs/operator/timeout';
 
 
 @IonicPage()

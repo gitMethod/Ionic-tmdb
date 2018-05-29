@@ -32,14 +32,10 @@ export class DetailsTmdbProvider {
   }
 
   findPersonBackdrop(array){
-    if( array.results.length === 0){
-      return array = ['assets/imgs/newPeopleBack.jpg']
-    } else {
+    console.log(array);
       return array.results
         .filter(image => image.aspect_ratio === 1.7777777777778)
-        .map(backdrop => 'http://image.tmdb.org/t/p/w300' + backdrop.file_path);
-    }
-
+        .map(backdrop => backdrop.file_path);
   }
 
 

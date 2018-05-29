@@ -26,9 +26,7 @@ export class ListsRest {
     }
     return this.http.get(appList.apiUrl + dateSince + appList.minRange + dateUntil + appList.maxRange +'&page=' + appList.responsePage)
     .map(result=>{
-      let tmpArray = this.removeNullItems(result);
-      this.preloadImg(tmpArray);
-      return tmpArray;
+      return this.removeNullItems(result);
     });
   }
 
@@ -39,15 +37,5 @@ export class ListsRest {
     });
     return array;
   }
-
-  preloadImg(array){
-    array.forEach(item=>{
-      this.imageLoader.preload('http://image.tmdb.org/t/p/w154' + item.profile_path)
-    })
-  }
-
-
-
-
 
 }

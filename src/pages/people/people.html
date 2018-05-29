@@ -2,9 +2,14 @@
 <ion-content style="background-color: #ff7400">
   <ion-grid no-padding="">
     <ion-row>
-      <ion-col col-4 col-sm-3 col-md-2 *ngFor="let people of people; let i = index" style="background: #2b2b2b" (click)="pushDetailsPage(i)">
+      <ion-col
+        col-4 col-sm-3 col-md-2
+        *ngFor="let people of people; let i = index"
+        style="background: #0e0e0e; min-height: 160px"
+        (click)="pushDetailsPage(i)">
         <div class="hero-image">
           <img
+            width="100%"
             [src]="'http://image.tmdb.org/t/p/w154' + people.profile_path"
             onerror="this.src='assets/imgs/newPeoplePoster.jpg'"
           />

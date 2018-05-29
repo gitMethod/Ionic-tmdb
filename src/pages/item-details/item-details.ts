@@ -12,6 +12,7 @@ import {CircleProgressOptions} from 'ng-circle-progress';
 export class ItemDetailsPage {
 
   backdrop: any = 'assets/imgs/backHolder.jpg';
+  fallback: any = '';
   poster: any = 'assets/imgs/posterHolder.jpg';
   firstSubtitle: any = '';
   secondSubtitle: any = '';
@@ -53,6 +54,7 @@ export class ItemDetailsPage {
       this.circleUnits = '%';
       this.circleTitle = movie.vote_average;
       this.backdrop =  movie.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + movie.backdrop_path) : 'assets/imgs/newMovieBack.jpg';
+      this.fallback =
       this.poster = this.navParams.get('poster')
         ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/newMoviePoster.jpg';
       this.rating = movie.vote_average;
@@ -72,7 +74,7 @@ export class ItemDetailsPage {
       this.circleTitle = tv.vote_average;
       this.backdrop =  tv.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + tv.backdrop_path) : 'assets/imgs/newTvBack.jpg';
       this.poster = this.navParams.get('poster')
-        ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/newTvPoster.jpg';
+        ? 'http://image.tmdb.org/t/p/w154'  + this.navParams.get('poster') : 'assets/imgs/newTvPoster.jpg';
       this.rating = tv.vote_average;
       this.firstSubtitle = tv.first_air_date.substr(0,4);
       this.secondSubtitle = tv.episode_run_time + ' minutes';
@@ -85,7 +87,8 @@ export class ItemDetailsPage {
   loadPeople(id){
     let people;
     this.detailsTmdb.getPersonImages(id).subscribe( data=>{
-      this.backdrop =  data[0];
+      this.backdrop =  data[0] == null
+        ? 'assets/imgs/newPeopleback.jpg' : 'http://image.tmdb.org/t/p/w300' + data[0];
     });
     this.detailsTmdb.getPerson(id).subscribe( data => {
       console.log(data);
@@ -105,17 +108,4 @@ export class ItemDetailsPage {
   popPage(){
     this.navCtrl.pop();
   }
-
-  ionViewWillEnter() {
-    document.querySelector("ion-navbar")['style'].display = 'none';
-    document.querySelector("super-tabs-toolbar")['style'].display = 'none';
-  }
-
-  ionViewWillLeave() {
-    document.querySelector("ion-navbar")['style'].display = 'flex';
-    document.querySelector("super-tabs-toolbar")['style'].display = 'flex';
-  }
-
-
-
 }
