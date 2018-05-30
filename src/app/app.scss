@@ -1,4 +1,29 @@
+///menu
+.side-menu img {
+  width: 25%;
+  margin: 24px 0 8px 0;
+}
 
+.side-menu p {
+  font-weight: bold;
+  color: #333333;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.side-menu h2 {
+  margin-left: 16px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.side-menu ion-list {
+  padding-top: 8px;
+}
+
+.side-menu .item-md, .content-md {
+  background-color: #ff7400;
+}
 
 /// darkened background popoover
 .backdropOpacityPopover {

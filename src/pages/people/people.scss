@@ -20,11 +20,16 @@ page-people {
   .hero-image::after {
     display: block;
     position: relative;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(0, 0, 0, 0.66) 100%);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(0, 0, 0, 0.80) 100%);
     margin-top: -100px;
     height: 96px;
     width: 100%;
     content: '';
+  }
+
+  img{
+    min-height: 100%;
+    min-width: 100%;
   }
 }
 

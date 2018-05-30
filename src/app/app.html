@@ -4,17 +4,20 @@
 
 <ion-nav [root]="rootPage" #content></ion-nav>
 
-<ion-menu [content]="content" type="overlay">
+<ion-menu [content]="content" type="overlay" class="side-menu">
   <ion-header>
-    <ion-item text-center="">
-      <h2 >Side menu</h2>
+    <ion-item text-center="" no-lines="">
+      <img src="assets/imgs/masks.png">
+      <p>Theatron</p>
     </ion-item>
   </ion-header>
   <ion-content>
-    <ion-item no-lines="">
-      <ion-icon name="mail" item-start></ion-icon>
-      <h5>Contact Developer</h5>
-    </ion-item>
+    <ion-list>
+      <button ion-item="" detail-push="true">
+        <ion-icon name="mail" item-start color="darker"></ion-icon>
+        <h2>Contact Developer</h2>
+      </button>
+    </ion-list>
   </ion-content>
 </ion-menu>
 

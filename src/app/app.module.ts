@@ -24,6 +24,7 @@ import {IonicImageLoader} from 'ionic-image-loader';
 import { DetailsTmdbProvider } from '../providers/rest-tmdb/details-tmdb';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import {SuperTabsModule} from 'ionic2-super-tabs';
+import {VirtualScrollModule} from 'angular2-virtual-scroll';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {SuperTabsModule} from 'ionic2-super-tabs';
     IonicModule.forRoot(MyApp),
     IonicImageLoader.forRoot(),
     NgCircleProgressModule.forRoot(),
-    SuperTabsModule.forRoot()
+    SuperTabsModule.forRoot(),
+    VirtualScrollModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

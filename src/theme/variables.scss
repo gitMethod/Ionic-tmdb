@@ -44,10 +44,17 @@ $colors: (
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  orangeMain:     #ff7400,
+  orangeMain: #ff7400,
+  darker: #333333
 );
 
+$item-md-detail-push-show : true;
+$item-wp-detail-push-show: true;
+$item-ios-detail-push-show: true;
 
+$item-md-detail-push-color : color($colors, darker);
+$item-wp-detail-push-color: color($colors, darker);
+$item-ios-detail-push-color: color($colors, darker);
 
 // App iOS Variables
 // --------------------------------------------------

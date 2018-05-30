@@ -53,7 +53,8 @@ export class ItemDetailsPage {
       movie = data;
       this.circleUnits = '%';
       this.circleTitle = movie.vote_average;
-      this.backdrop =  movie.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + movie.backdrop_path) : 'assets/imgs/newMovieBack.jpg';
+      this.backdrop =  movie.backdrop_path
+        ? ('http://image.tmdb.org/t/p/w300' + movie.backdrop_path) : 'assets/imgs/newMovieBack.jpg';
       this.fallback =
       this.poster = this.navParams.get('poster')
         ? 'http://image.tmdb.org/t/p/w154' + this.navParams.get('poster') : 'assets/imgs/newMoviePoster.jpg';
@@ -72,7 +73,8 @@ export class ItemDetailsPage {
       tv = data;
       this.circleUnits = '%';
       this.circleTitle = tv.vote_average;
-      this.backdrop =  tv.backdrop_path ? ('http://image.tmdb.org/t/p/w300' + tv.backdrop_path) : 'assets/imgs/newTvBack.jpg';
+      this.backdrop =  tv.backdrop_path
+        ? ('http://image.tmdb.org/t/p/w300' + tv.backdrop_path) : 'assets/imgs/newTvBack.jpg';
       this.poster = this.navParams.get('poster')
         ? 'http://image.tmdb.org/t/p/w154'  + this.navParams.get('poster') : 'assets/imgs/newTvPoster.jpg';
       this.rating = tv.vote_average;
